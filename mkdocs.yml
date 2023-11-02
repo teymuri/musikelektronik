@@ -1,0 +1,6 @@
+site_name: My Docs
+site_url: https://example.com/
+nav:
+  - Home: index.md
+  - About: namen.md
+theme: readthedocs
