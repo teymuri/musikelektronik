@@ -8,7 +8,7 @@
         
         <link rel="canonical" href="https://teymuri.github.io/musikelektronik/namen/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Namen - Modul Musik-Elektronik</title>
+        <title>Namengebung - Modul Musik-Elektronik</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -41,7 +41,7 @@
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="./" class="dropdown-item active">Namen</a>
+    <a href="./" class="dropdown-item active">Namengebung</a>
 </li>
                                     
 <li>
@@ -87,15 +87,15 @@
             
             <li class="nav-item" data-level="1"><a href="#namengebung" class="nav-link">Namengebung</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#einzellige-variablen" class="nav-link">Einzellige Variablen</a>
+            <li class="nav-item" data-level="2"><a href="#einzellige-namen" class="nav-link">Einzellige Namen</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#lokale-variablen" class="nav-link">Lokale Variablen</a>
+            <li class="nav-item" data-level="2"><a href="#lokale-namen" class="nav-link">Lokale Namen</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#globale-variable" class="nav-link">Globale Variable</a>
+            <li class="nav-item" data-level="2"><a href="#globale-namen" class="nav-link">Globale Namen</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -107,14 +107,13 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="namengebung">Namengebung</h1>
-<p>Da es in der Programmierung (für uns Menschen) allgemein einfacher ist, sich Namen statt komplexer Daten zu merken, können wir unseren Daten in unserem Code Namen zuweisen.</p>
-<p>Es gibt insgesamt drei Arten von Namen:</p>
-<h2 id="einzellige-variablen">Einzellige Variablen</h2>
-<p>Hierfür verwenden wir einzelne Buchstaben in Kleinbuchstaben, wie folgt:</p>
-<pre><code>a = 123
+<p>In der Programmierung (für uns Menschen) ist es allgemein einfacher, sich Namen anstelle von komplexen Daten zu merken. Daher können wir in unserem Code Namen für unsere Daten zuweisen. Es gibt drei Möglichkeiten Namen zu definieren:</p>
+<h2 id="einzellige-namen">Einzellige Namen</h2>
+<p>Hierfür verwenden wir einzelne Kleinbuchstaben, wie folgt:</p>
+<pre><code class="language-supercollider">a = 123
 </code></pre>
 <p>Es gibt jedoch eine Ausnahme: "s" ist bereits von SuperCollider (SC) reserviert und verweist auf den aktuellen Server. Daher sollte "s" nicht überschrieben werden.</p>
-<h2 id="lokale-variablen">Lokale Variablen</h2>
+<h2 id="lokale-namen">Lokale Namen</h2>
 <p>Alternativ können wir vollständige Namen verwenden. Es ist wichtig, dass diese mit Kleinbuchstaben beginnen. Für diese Art von Namen müssen sie mit "var" deklariert und in einem Code-Block stehen. Außerhalb der geschweiften Klammern haben diese Namen keine Bedeutung. Code-Blöcke sind alle Teile, die sich zwischen zwei geschweiften Klammern befinden:</p>
 <pre><code class="language-supercollider">(
 var name = 123;
@@ -122,7 +121,7 @@ name = name + 1;
 name
 )
 </code></pre>
-<h2 id="globale-variable">Globale Variable</h2>
+<h2 id="globale-namen">Globale Namen</h2>
 <p>Die letzte Art der Namenszuweisung erfolgt, indem wir vor den Namen eine Tilde setzen. Dadurch müssen diese Namen nicht in einem Code-Block eingeschlossen sein und können überall im Code verwendet werden. Beachten Sie, dass auch hier die Namen mit Kleinbuchstaben beginnen müssen:</p>
 <pre><code class="language-supercollider">~drei = 3;
 (
@@ -130,7 +129,7 @@ name
 )
 ~sieben = ~drei + ~vier;
 </code></pre>
-<p>(Wenn Sie mit Codeblöcken arbeiten, achten Sie darauf, dass das Ergebnis eines Codeblocks das ist, was in der letzten Zeile des Blocks steht!)</p></div>
+<p>Achtung: Wenn Sie mit Codeblöcken arbeiten, achten Sie darauf, dass das Ergebnis eines Codeblocks das ist, was in der letzten Zeile des Blocks steht!</p></div>
             </div>
         </div>
 
