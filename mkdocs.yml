@@ -1,5 +1,8 @@
-site_name: My Docs
-site_url: https://example.com/
+site_name: Modul Musik-Elektronik
+site_url: https://teymuri.github.io/musikelektronik/
 nav:
-  - Home: index.md
-  - About: namen.md
+  - Modulbeschreibung: index.md
+  - Kontakt: kontakt.md
+  - Kapitel: 
+    - Namen: namen.md
+    - Datenstrukturen: daten.md
