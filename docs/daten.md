@@ -34,11 +34,11 @@ Die `class`-Eigenschaft hingegen kann sinnvollerweise auch auf Strings (und jede
 
 Hier sind einige Klassen (auf der Sprach-Ebene), mit denen wir sehr viel arbeiten werden:
 
-- Integer (1)
-- Float (3.14)
-- String ("Musik Elektronik")
-- Array ([1, 2, 3, 4])
-- Boolean (true)
+- Integer ('1')
+- Float ('3.14')
+- String ('"Musik Elektronik"')
+- Array ('[1, 2, 3, 4]')
+- Boolean ('true')
 
 ## Übung
 Schreiben Sie für jede der folgenden Aufgaben eine Zeile Code:
