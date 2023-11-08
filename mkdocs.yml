@@ -1,8 +1,10 @@
-site_name: Modul Musik-Elektronik
+site_name: Übung Elektronische Musik
 site_url: https://teymuri.github.io/musikelektronik/
 nav:
   - Modulbeschreibung: index.md
   - Kontakt: kontakt.md
-  - Kapitel: 
-    - Namengebung: namen.md
-    - Datenstrukturen: daten.md
+  - Übersicht: 
+    - Wintersemester:
+      - Sprache: lang.md
+    - Sommersemester:
+      - Sprache: lang.md
