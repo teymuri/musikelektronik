@@ -2,22 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://teymuri.github.io/musikelektronik/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://teymuri.github.io/musikelektronik/daten/</loc>
-         <lastmod>2023-11-04</lastmod>
+         <lastmod>2023-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://teymuri.github.io/musikelektronik/kontakt/</loc>
-         <lastmod>2023-11-04</lastmod>
+         <lastmod>2023-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://teymuri.github.io/musikelektronik/namen/</loc>
-         <lastmod>2023-11-04</lastmod>
+         <loc>https://teymuri.github.io/musikelektronik/lang/</loc>
+         <lastmod>2023-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
