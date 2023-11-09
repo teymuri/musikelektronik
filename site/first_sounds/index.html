@@ -129,7 +129,49 @@
 </li>
 </ol>
 <p>Der Code <code>SinOsc.ar()</code> erzeugt standardmäßig eine Sinusschwingung mit den Standardwerten für Frequenz, Phase, Amplitude und DC-Offset. Wenn Sie spezifische Werte angeben möchten, können Sie sie als Argumente im SinOsc-Objekt setzen, z.B. <code>SinOsc.ar(440, 0, 0.5, 0)</code>, wobei 440 die Frequenz, 0 die Phase, 0.5 die Amplitude und 0 das DC-Offset ist.</p>
-<p>Um nun den Klang einer 440-Hz-Frequenz zu hören, müssen wir unsere UGens in eine Funktion einbetten und die <code>play</code>-Nachricht an diese Funktion senden. Dadurch wird die enthaltene UGen an den Server gesendet, und wir können etwas hören.</p></div>
+<p>Um nun den Klang einer 440-Hz-Frequenz zu hören, müssen wir unsere UGens in eine Funktion einbetten und die <code>play</code>-Nachricht an diese Funktion senden. Dadurch wird die enthaltene UGen an den Server gesendet, und wir können etwas hören.</p>
+<p>Bevor wir weitermachen und den ersten Sinuston an den Server senden, ist es wichtig zu wissen, wie wir den Ton wieder ausschalten können. Merken Sie sich die Tastenkombination <strong>Ctrl+.</strong>
+Dies deaktiviert den Server, und wir nutzen momentan diese Methode, um den Ton schnell auszuschalten.</p>
+<p>Schreiben Sie nun den folgenden Code-Block und führen Sie ihn aus (mit dem Cursor innerhalb des Blocks <strong>Ctrl+Enter</strong> drücken):</p>
+<pre><code class="language-supercollider">{SinOsc.ar(440, 0, 0.5, 0)}.play;
+</code></pre>
+<p>Stoppen Sie den Server mit <strong>Ctrl+.</strong> und lassen Sie uns den obigen Code etwas genauer betrachten.</p>
+<p>Wir öffnen zuerst mit den runden Klammern einen Block. Dies ist praktisch, wenn unser Code über mehrere Zeilen geht, damit wir alle Zeilen auf einmal auswerten können.</p>
+<pre><code class="language-supercollider">()
+</code></pre>
+<p>Als Nächstes öffnen wir ein paar geschweifte Klammern, um eine anonyme Funktion zu definieren. Sie ist anonym, weil wir diese Funktion nur an dieser Stelle als Beispiel verwenden und ihr keinen Namen geben:</p>
+<pre><code class="language-supercollider">({})
+</code></pre>
+<p>Innerhalb unserer Funktion schreiben wir unsere UGen mit den gewünschten Argumenten:</p>
+<pre><code class="language-supercollider">({SinOsc.ar(440, 0, 0.5, 0)})
+</code></pre>
+<p>Auf das Objekt SinOsc wenden wir die Nachricht <code>ar</code> an, die für Audio Rate steht. Die <code>ar</code>-Funktion sorgt dafür, dass die Sample-Ausgaben der UGen (hier SinOsc) in einer Audiorate (oft 44100 Mal pro Sekunde) vom Server an die Audiokarten unseres Rechners geschickt werden. Von dort werden diese Samples (die im Prinzip nichts anderes sind als Dezimalzahlen) an einen sogenannten DAC (Digital Audio Converter) geschickt, um dann als Spannungsvariationen (nach eventueller Verstärkung) an Lautsprecher gesendet zu werden. Wichtig ist auch zu verstehen, dass die <code>ar</code>-Methode gleichzeitig eine Instanz der SinOsc-Klasse generiert.</p>
+<p>Wenn wir an dieser Stelle unseren Code-Block auswerten, sehen wir im Post-Fenster, dass er zu einer Funktion evaluiert wurde (<code>-&gt; a Function</code>).</p>
+<p>Jetzt können wir unsere Funktion an den Server senden. Dafür rufen wir die <code>play</code>-Methode auf die Funktion auf. Was wir hier über die <code>play</code>-Methode einer Funktion wissen müssen: <code>play</code> generiert auf dem Server einen sogenannten Synth. Synths sind die Klanggeneratoren auf der Server-Seite. Diese Synth wird nach der Erstellung zum Klingen gebracht:</p>
+<pre><code class="language-supercollider">({SinOsc.ar(440, 0, 0.5, 0)}.play)
+</code></pre>
+<p>Wenn wir die tatsächliche Synth, die für uns von <code>play</code> generiert wurde, weiterhin kontrollieren möchten (der serverinterne Name wird im Post-Fenster nach dem Auswerten der obigen Zeile angezeigt), können wir ganz einfach die ausgegebene Synth einer Variable zuweisen:</p>
+<pre><code class="language-supercollider">(x = {SinOsc.ar(440, 0, 0.5, 0)}.play)
+</code></pre>
+<p>Jetzt enthält <code>x</code> die Synth, und wir können sie zum Beispiel über die Variable <code>x</code> ausschalten, indem wir der Variable <code>x</code> die Nachricht <code>free</code> senden:</p>
+<pre><code>x.free;
+</code></pre>
+<p>Das ist praktisch, da wir mit <code>free</code> nur diese eine Synth-Instanz abschalten können (im Unterschied zu unserer vorherigen Lösung <strong>Ctrl+.</strong>, die den kompletten Server herunterfährt).</p>
+<p>Wir können unserer Funktion Argumente hinzufügen, sodass wir die Parameter unseres SinOsc explizit eingeben können:</p>
+<pre><code class="language-supercollider">(
+x = {
+    arg freq = 440, amp = 0.5;
+    SinOsc.ar(freq, mul: amp)
+}.play
+)
+</code></pre>
+<p>So können wir durch die <code>set</code>-Methode unserer Synth-Instanzen die Frequenz oder die Amplitude neu setzen, und das während der Synth läuft (also während unser Sinuston weiter erklingt):</p>
+<pre><code class="language-supercollider">// Amplitude halbieren
+x.set(\amp, 0.25);
+
+// Die Frequenz um eine Oktave tiefer spielen
+x.set(\freq, 220);
+</code></pre></div>
             </div>
         </div>
 
