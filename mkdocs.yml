@@ -6,5 +6,4 @@ nav:
   - Übersicht: 
     - Wintersemester:
       - Sprache: lang.md
-    - Sommersemester:
-      - Sprache: lang.md
+      - Die ersten Töne: first_sounds.md
