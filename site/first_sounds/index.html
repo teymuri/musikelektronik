@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="https://teymuri.github.io/musikelektronik/kontakt/">
+        <link rel="canonical" href="https://teymuri.github.io/musikelektronik/first_sounds/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Kontakt - Übung Elektronische Musik</title>
+        <title>Die ersten Töne - Übung Elektronische Musik</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -33,10 +33,10 @@
                             <li class="navitem">
                                 <a href=".." class="nav-link">Modulbeschreibung</a>
                             </li>
-                            <li class="navitem active">
-                                <a href="./" class="nav-link">Kontakt</a>
+                            <li class="navitem">
+                                <a href="../kontakt/" class="nav-link">Kontakt</a>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Übersicht <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
@@ -49,7 +49,7 @@
 </li>
             
 <li>
-    <a href="../first_sounds/" class="dropdown-item">Die ersten Töne</a>
+    <a href="./" class="dropdown-item active">Die ersten Töne</a>
 </li>
     </ul>
   </li>
@@ -64,12 +64,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href=".." class="nav-link">
+                                <a rel="prev" href="../lang/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../lang/" class="nav-link">
+                                <a rel="next" class="nav-link disabled">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -91,8 +91,12 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#kontakt" class="nav-link">Kontakt</a>
+            <li class="nav-item" data-level="1"><a href="#die-ersten-tone" class="nav-link">Die ersten Töne</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#starten-des-servers" class="nav-link">Starten des Servers</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -100,8 +104,32 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="kontakt">Kontakt</h1>
-<p>amiratwork22 [at] gmail [dot] com</p></div>
+<h1 id="die-ersten-tone">Die ersten Töne</h1>
+<h2 id="starten-des-servers">Starten des Servers</h2>
+<p>Im letzten Kapitel haben wir uns mit der Sprache SuperCollider beschäftigt. Die Sprache allein kann keinen Klang erzeugen, sondern ist lediglich für die Weitergabe unserer Befehle an den Klang-Server verantwortlich. Um unseren ersten Ton in SuperCollider zu erzeugen, müssen wir zuerst den Server starten. Erinnern wir uns daran, dass die Einzelvariabel "s" für den Server steht. Mit dem Aufrufen des <code>boot</code>-Befehls starten wir ihn:</p>
+<pre><code>s.boot;
+</code></pre>
+<p>Aus historischen Gründen werden in SuperCollider auch die Objekte, die für die Klangerzeugung verantwortlich sind, als "UGen" bezeichnet. Eine dieser UGens ist SinOsc, die eine einfache Sinusschwingung generiert. Die meisten UGens in SuperCollider benötigen Informationen von uns (ähnlich wie Argumente in Funktionen im letzten Kapitel). Zum Beispiel benötigt unser SinOsc UGen folgende Eingaben: Frequenz, Phase, Amplitude und DC-Offset. Geben Sie den folgenden Code in Ihren SuperCollider-Editor ein. Sobald Sie die Klammer öffnen, sollten Sie diese Argumente sehen können. Achten Sie darauf, dass diese Argumente auch Standardwerte haben, so dass, wenn wir keine Informationen bereitstellen, diese Standardwerte übernommen werden:</p>
+<pre><code class="language-supercollider">SinOsc.ar();
+</code></pre>
+<p>(Tipp: Wenn die Argumentenliste nicht angezeigt wird, kann man sie durch Drücken der Tastenkombination <strong>Shift+Ctrl+L</strong> wieder einblenden.)</p>
+<p>Im Kontext von SuperCollider steuern die Argumente des SinOsc (Sinus Oszillator) die Eigenschaften der erzeugten Sinusschwingung. Hier sind die Argumente:</p>
+<ol>
+<li>
+<p><strong>Frequenz (freq):</strong> Dies bestimmt, wie viele Schwingungen pro Sekunde erzeugt werden. Eine höhere Frequenz erzeugt einen höheren Ton.</p>
+</li>
+<li>
+<p><strong>Phase (phase):</strong> Die Phase gibt den Startpunkt der Sinusschwingung an. Eine Phase von 0 bedeutet, dass die Schwingung bei null Grad beginnt.</p>
+</li>
+<li>
+<p><strong>Amplitude (mul):</strong> Die Amplitude beeinflusst die Höhe der Schwingung und damit die Lautstärke des Tons. Eine höhere Amplitude erzeugt einen lauter klingenden Ton (Werte zwischen 0 und 1).</p>
+</li>
+<li>
+<p><strong>DC-Offset (add):</strong> Dies ist eine konstante Spannung, die zur Sinuswelle hinzugefügt wird. Sie beeinflusst den Grundpegel der Welle und kann dazu verwendet werden, sicherzustellen, dass die Welle um den Nullpunkt zentriert ist oder einen bestimmten Ausgangspunkt hat.</p>
+</li>
+</ol>
+<p>Der Code <code>SinOsc.ar()</code> erzeugt standardmäßig eine Sinusschwingung mit den Standardwerten für Frequenz, Phase, Amplitude und DC-Offset. Wenn Sie spezifische Werte angeben möchten, können Sie sie als Argumente im SinOsc-Objekt setzen, z.B. <code>SinOsc.ar(440, 0, 0.5, 0)</code>, wobei 440 die Frequenz, 0 die Phase, 0.5 die Amplitude und 0 das DC-Offset ist.</p>
+<p>Um nun den Klang einer 440-Hz-Frequenz zu hören, müssen wir unsere UGens in eine Funktion einbetten und die <code>play</code>-Nachricht an diese Funktion senden. Dadurch wird die enthaltene UGen an den Server gesendet, und wir können etwas hören.</p></div>
             </div>
         </div>
 
