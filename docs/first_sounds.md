@@ -85,16 +85,31 @@ Wir können unserer Funktion Argumente hinzufügen, sodass wir die Parameter uns
 x = {
 	arg freq = 440, amp = 0.5;
 	SinOsc.ar(freq, mul: amp)
-}.play
+}
 )
 ```
 
 So können wir durch die `set`-Methode unserer Synth-Instanzen die Frequenz oder die Amplitude neu setzen, und das während der Synth läuft (also während unser Sinuston weiter erklingt):
 
 ```supercollider
+// Funktion abspielen
+x.play;
+
 // Amplitude halbieren
 x.set(\amp, 0.25);
 
 // Die Frequenz um eine Oktave tiefer spielen
 x.set(\freq, 220);
 ```
+
+Das Verständnis eines Prinzips ist hier von Bedeutung: auch die UGens (wie alles andere auf unserem Rechner!) arbeiten ausschließlich mit Zahlen! Das bedeutet, ihre Ausgabe besteht ausschließlich aus Zahlen. Das ermöglicht es uns, eine weitere UGen als Argument für unsere SinOsc UGen einzusetzen. Dadurch wird ein kontinuierlicher Datenstrom an Zahlen an die Haupt-UGen gesendet, die dann als Frequenz (oder auch andere Parameter) interpretiert werden können. Ein Beispiel:
+
+```supercollider
+(
+    { SinOsc.ar(SinOsc.kr(1, mul: 100, add: 400)) }.play
+)
+```
+
+Dieses Beispiel demonstriert, wie eine Sinus-Oszillation (SinOsc) mit einer anderen Sinus-Oszillation als Modulator für ihre Frequenz verwendet werden kann.
+
+

@@ -1,12 +1,13 @@
+# Elektronische Musik / Musik-Elektronik
 ## Modul Kernfach Theorie III
 
-Ziel dieser Übung ist (neben einer umfassenden Vermittlung der Geschichte der Musik-Elektronik und elektronischen Musik) das Kennenlernen und Erproben ihrer Möglichkeiten in Theorie und Praxis anhand eines gemeinsam zu erarbeitenden Musikbeispieles.
+Das Ziel dieser Übung ist das Kennenlernen und Erproben der Möglichkeiten der elektronischen Musik in Theorie und Praxis anhand eines gemeinsam zu erarbeitenden Musikbeispiels. Die Analyse von Werken aus dem Repertoire ist ebenfalls ein Schwerpunkt dieses Seminars.
 
-- Titel (dt.) der konkr. Lehrveranstaltung: 	Elektronische Musik + Musik-Elektronik
-- Veranstaltungsart: 	Übung (anmeldepflichtig)
-- SWS: 	2
-- Leistungspunkte (ECTS): 	2
+- Titel (dt.) der konkreten Lehrveranstaltung: Elektronische Musik + Musik-Elektronik
+- Veranstaltungsart: Übung (anmeldepflichtig)
+- Semesterwochenstunden (SWS): 2
+- Leistungspunkte (ECTS): 2
 
-Beginn des Moduls ist jeweils im Wintersemester. Das gesamte Modul erstreckt sich über zwei Semester.
+Das Modul beginnt jeweils im Wintersemester und erstreckt sich über zwei Semester.
 
-Bitte führen Sie die Code-Beispiele in Ihrer SuperCollider-Umgebung aus und evaluieren Sie diese, damit Sie sich schneller mit dem Arbeitsverfahren in SuperCollider vertraut machen können.
+Bitte führen Sie die Code-Beispiele in Ihrer SuperCollider-Umgebung aus und evaluieren Sie diese, um sich schneller mit dem Arbeitsverfahren in SuperCollider vertraut zu machen. Die Bearbeitung der Übungen in den Kapiteln wird ausdrücklich empfohlen. Bei Fragen wenden Sie sich bitte an das Lehrpersonal.
