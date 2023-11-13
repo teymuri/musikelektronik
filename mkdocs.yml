@@ -1,4 +1,6 @@
 site_name: Übung Elektronische Musik
+extra_css:
+  - style.css
 site_url: https://teymuri.github.io/musikelektronik/
 nav:
   - Modulbeschreibung: index.md

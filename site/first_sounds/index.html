@@ -162,16 +162,25 @@ Dies deaktiviert den Server, und wir nutzen momentan diese Methode, um den Ton s
 x = {
     arg freq = 440, amp = 0.5;
     SinOsc.ar(freq, mul: amp)
-}.play
+}
 )
 </code></pre>
 <p>So können wir durch die <code>set</code>-Methode unserer Synth-Instanzen die Frequenz oder die Amplitude neu setzen, und das während der Synth läuft (also während unser Sinuston weiter erklingt):</p>
-<pre><code class="language-supercollider">// Amplitude halbieren
+<pre><code class="language-supercollider">// Funktion abspielen
+x.play;
+
+// Amplitude halbieren
 x.set(\amp, 0.25);
 
 // Die Frequenz um eine Oktave tiefer spielen
 x.set(\freq, 220);
-</code></pre></div>
+</code></pre>
+<p>Das Verständnis eines Prinzips ist hier von Bedeutung: auch die UGens (wie alles andere auf unserem Rechner!) arbeiten ausschließlich mit Zahlen! Das bedeutet, ihre Ausgabe besteht ausschließlich aus Zahlen. Das ermöglicht es uns, eine weitere UGen als Argument für unsere SinOsc UGen einzusetzen. Dadurch wird ein kontinuierlicher Datenstrom an Zahlen an die Haupt-UGen gesendet, die dann als Frequenz (oder auch andere Parameter) interpretiert werden können. Ein Beispiel:</p>
+<pre><code class="language-supercollider">(
+    { SinOsc.ar(SinOsc.kr(1, mul: 100, add: 400)) }.play
+)
+</code></pre>
+<p>Dieses Beispiel demonstriert, wie eine Sinus-Oszillation (SinOsc) mit einer anderen Sinus-Oszillation als Modulator für ihre Frequenz verwendet werden kann.</p></div>
             </div>
         </div>
 
