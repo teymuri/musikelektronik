@@ -112,4 +112,41 @@ Das Verständnis eines Prinzips ist hier von Bedeutung: auch die UGens (wie alle
 
 Dieses Beispiel demonstriert, wie eine Sinus-Oszillation (SinOsc) mit einer anderen Sinus-Oszillation als Modulator für ihre Frequenz verwendet werden kann.
 
+Lassen Sie uns dieses Beispiel etwas genauer unter die Lupe nehmen:
 
+Das innere `SinOsc` fungiert hier als Frequenzmodulator. Ein `SinOsc` generiert Dezimalzahlen zwischen -1 und 1 mit einer bestimmten Frequenz. Diese Zahlen werden mit 100 multipliziert, um den Bereich auf -100 bis 100 zu skalieren. Danach wird 400 dazu addiert, um den Wertebereich zu verschieben. Dies führt zu einem Glissando-Effekt im Bereich zwischen 300 Hz und 500 Hz (Achtung: die Multiplikation erfolgt vor der Addition). Das gleiche Ergebnis kann durch Senden der Nachricht `range` an den Zahlenstrom des inneren `SinOsc` mit den Argumenten 300 und 500 erreicht werden (Mit dem Cursor auf dem Wort "range" drücken Sie die Tastenkombination **Ctrl+D**, um die Dokumentationsseite über `range` zu öffnen. Dort können Sie unter verschiedenen Einträgen auf **UGen** klicken, um weitere Informationen über `range` zu erhalten):
+```
+(
+    { SinOsc.ar(SinOsc.kr(1).range(300, 500) * 100 + 400) }.play;
+)
+```
+
+**Übung: LFO-Modulation der Frequenz**
+Modulieren Sie die Frequenz eines Sinus-Oszillators mit einem LFO (Low-Frequency Oscillator) im Bereich 100 Hz - 300 Hz.
+Sie dürfen die Frequenz des LFO bestimmen. Verwenden Sie einen LFO um unterschiedliche Parameter einesOszillators zu
+modulieren.
+
+## Mehrkanal-Erweiterung
+
+Viele UGens in SuperCollider unterstützen eine Eigenschaft namens [Multiple Dispatching](https://de.wikipedia.org/wiki/Multimethode). Was dies vereinfacht bedeutet, ist, dass das Verhalten der UGens je nach Typ ihrer Argumente unterschiedlich sein wird. Zum Beispiel können wir einem Sinus-Oszillator nicht nur eine Zahl als Argument für einen seiner Parameter angeben, sondern auch ein Array von Zahlen. Was dann passiert, ist, dass SuperCollider die Angabe des Arrays als Argument interpretiert, als eine Liste von Ausgängen (z.B. eine Liste von Lautsprechern), und generiert so viele Signale wie die Größe des Arrays und sendet sie an die Lautsprecher. Schauen wir uns dazu ein Beispiel an, indem wir ein Signal-Array vom selben Sinus-Oszillator mit unterschiedlichen Amplituden generieren. Dazu betrachten wir den sogenannten "Server Meter", der uns die Signalwege In und Out vom SuperCollider-Server anzeigt. Drücken Sie die Tastenkombination **Ctrl-M** oder klicken Sie im Editor unter dem Server-Menu auf **Server > Show Server Meter**.
+
+![Server Meter](pix/server-meter.jpg)
+
+Jetzt evaluieren Sie folgenden Code:
+```supercollider
+(
+{
+    SinOsc.ar(200, mul: [0.01, 0.3])
+}.play;
+)
+```
+
+**Übung: Beschreibung**
+Erklären Sie, was Sie im Server Meter sehen, und den Grund dafür.
+
+**Übung: Generierung eines Intervals**
+Generieren Sie ein Quint-Intervall mit den beiden Tönen A (440 Hz) und der Quinte darüber. 
+Senden Sie an Ihre Funktion statt `play` die Nachricht `value`, um die Funktion zu evaluieren, anstatt den Ausgabewert an den Server für Klanggenerierung zu leiten.
+Die Ausgabe ist ein Array von UGens.
+
+Beachten Sie, dass es in diesem Kontext ausreicht, wenn eines der Argumente anstelle einer Zahl ein Array ist, um eine entsprechende Array von Ausgängen zurückzubekommen.

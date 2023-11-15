@@ -337,3 +337,77 @@ Schreiben Sie eine Funktion namens `~squareNumbers`, die eine Liste von Zahlen a
 **Übung: Fibonacci-Folge generieren**
 Schreiben Sie eine Funktion `~generateFibonacci`, die eine positive Ganzzahl n als Argument erhält und die ersten n Zahlen in der Fibonacci-Folge zurückgibt.
 
+
+## Kontrollstrukturen
+
+Manchmal möchten wir Teile unseres Codes nur ausführen, wenn eine bestimmte Bedingung erfüllt ist. Das erreichen wir mithilfe der sogenannten [Kontrollstrukturen](https://de.wikipedia.org/wiki/Kontrollstruktur). Eines dieser Mittel ist das `if`-Statement, das die folgende Form hat:
+
+**(If (Bedingung ist erfüllt), {Dann evaluiere diese Funktion}, {Ansonsten evaluiere diese Funktion})** 
+
+Wir schauen uns ein Beispiel an: Wir testen den Wert einer Zufallszahl und möchten eine Zeile im Post-Fenster ausgeben lassen. Diese Zeile soll die Nachricht "Größer als Zehn" ausgeben, wenn unsere Zahl größer als 10 ist, und "Kleiner als Zehn" ausgeben, wenn die Zahl kleiner als 10 ist.
+
+```
+(
+// Eine Zufallszahl generieren
+var zahl = 0.rrand(20);
+if (
+	// Den Wert der Zufallszahl auswerten
+	(zahl > 10),
+	// Wenn die Zahl größer ist als 10, dann rufen wir diese Funktion auf
+	{zahl.postln; "Die Zahl ist größer als 10"},
+	// Ansonsten rufen wir diese Funktion auf
+	{zahl.postln; "Die Zahl ist kleiner als 10"}
+)
+)
+```
+
+**Übung:** 
+Schreiben Sie eine Funktion namens `randomColor`, die 50% der Zeit den String "Rot" und 50% der Zeit den String "Gelb" ausgibt.
+
+Tipp: Nutzen Sie die eingebaute Funktion `coin`. Diese Funktion erhält eine Zahl zwischen 0 und 1 als Argument und gibt mit der angegebenen Wahrscheinlichkeit die booleschen Werte `true` oder `false` aus. Zum Beispiel wird `1.coin` immer `true` ausgeben, während `0.coin` immer zu `false` evaluiert wird.
+
+**Übung: Überprüfung der Geradheit einer Zahl**
+Schreiben Sie eine Funktion, die überprüft, ob eine gegebene Zahl gerade oder ungerade ist, und eine entsprechende Nachricht ausgibt.
+
+Tipp: Die `mod`-Funktion kann nützlich sein. Lesen Sie dafür die entsprechende Dokumentationsseite.
+
+**Übung: Palindrom-Überprüfung**
+Schreiben Sie eine Funktion, die überprüft, ob ein gegebener String ein Palindrom ist, d.h., ob er von vorne und von hinten gleich gelesen wird.
+
+**Übung: Schachbrett-Muster**
+Schreiben Sie eine Funktion, die ein Schachbrett-Muster mit den Zeichen "#" und " " erstellt. Die Größe des Schachbretts soll als Argument übergeben werden.
+
+Tipp: Mit folgendem Ausdruck erhalten Sie ein zweidimensionales Array, dessen Unter-Arrays mit Zahlen zwischen 0 und 7 (einschließlich) gefüllt sind und sich rotierend von der nächsten Zahl fortsetzen:
+
+```
+Array.fill(8, {arg x; Array.iota(8).rotate(x * -1)})
+```
+Zur Veranschaulichung evaluieren Sie den folgenden Block, der dieses zweidimensionale Array im Post-Window ausgibt:
+```
+(
+Array.fill(8, {arg x; Array.iota(8).rotate(x * -1)}).do {
+	arg row;
+	row.do {
+		arg col;
+		"% ".postf(col)
+	};
+	"".postln
+}
+)
+```
+
+```
+// Ergebnis im Post-Window:
+
+0 1 2 3 4 5 6 7
+1 2 3 4 5 6 7 0
+2 3 4 5 6 7 0 1
+3 4 5 6 7 0 1 2
+4 5 6 7 0 1 2 3
+5 6 7 0 1 2 3 4
+6 7 0 1 2 3 4 5
+7 0 1 2 3 4 5 6
+```
+
+Für weitere Informationen zu Kontrollstrukturen suchen Sie in der Dokumentation nach "Control Structures"
+(**Ctrl+Shift+D** und nach dem Begriff suchen).
