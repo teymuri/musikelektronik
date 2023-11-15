@@ -106,6 +106,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-level="2"><a href="#kontrollstrukturen" class="nav-link">Kontrollstrukturen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -324,7 +328,62 @@ Sie können viele andere Operationen mit <code>do</code> und <code>collect</code
 <p><strong>Übung: Quadratzahlen erzeugen</strong>
 Schreiben Sie eine Funktion namens <code>~squareNumbers</code>, die eine Liste von Zahlen als Argument erhält und eine Liste zurückgibt, in der die Quadrate der ursprünglichen Zahlen stehen. Benutzen sie <code>collect</code>.</p>
 <p><strong>Übung: Fibonacci-Folge generieren</strong>
-Schreiben Sie eine Funktion <code>~generateFibonacci</code>, die eine positive Ganzzahl n als Argument erhält und die ersten n Zahlen in der Fibonacci-Folge zurückgibt.</p></div>
+Schreiben Sie eine Funktion <code>~generateFibonacci</code>, die eine positive Ganzzahl n als Argument erhält und die ersten n Zahlen in der Fibonacci-Folge zurückgibt.</p>
+<h2 id="kontrollstrukturen">Kontrollstrukturen</h2>
+<p>Manchmal möchten wir Teile unseres Codes nur ausführen, wenn eine bestimmte Bedingung erfüllt ist. Das erreichen wir mithilfe der sogenannten <a href="https://de.wikipedia.org/wiki/Kontrollstruktur">Kontrollstrukturen</a>. Eines dieser Mittel ist das <code>if</code>-Statement, das die folgende Form hat:</p>
+<p><strong>(If (Bedingung ist erfüllt), {Dann evaluiere diese Funktion}, {Ansonsten evaluiere diese Funktion})</strong> </p>
+<p>Wir schauen uns ein Beispiel an: Wir testen den Wert einer Zufallszahl und möchten eine Zeile im Post-Fenster ausgeben lassen. Diese Zeile soll die Nachricht "Größer als Zehn" ausgeben, wenn unsere Zahl größer als 10 ist, und "Kleiner als Zehn" ausgeben, wenn die Zahl kleiner als 10 ist.</p>
+<pre><code>(
+// Eine Zufallszahl generieren
+var zahl = 0.rrand(20);
+if (
+    // Den Wert der Zufallszahl auswerten
+    (zahl &gt; 10),
+    // Wenn die Zahl größer ist als 10, dann rufen wir diese Funktion auf
+    {zahl.postln; &quot;Die Zahl ist größer als 10&quot;},
+    // Ansonsten rufen wir diese Funktion auf
+    {zahl.postln; &quot;Die Zahl ist kleiner als 10&quot;}
+)
+)
+</code></pre>
+<p><strong>Übung:</strong> 
+Schreiben Sie eine Funktion namens <code>randomColor</code>, die 50% der Zeit den String "Rot" und 50% der Zeit den String "Gelb" ausgibt.</p>
+<p>Tipp: Nutzen Sie die eingebaute Funktion <code>coin</code>. Diese Funktion erhält eine Zahl zwischen 0 und 1 als Argument und gibt mit der angegebenen Wahrscheinlichkeit die booleschen Werte <code>true</code> oder <code>false</code> aus. Zum Beispiel wird <code>1.coin</code> immer <code>true</code> ausgeben, während <code>0.coin</code> immer zu <code>false</code> evaluiert wird.</p>
+<p><strong>Übung: Überprüfung der Geradheit einer Zahl</strong>
+Schreiben Sie eine Funktion, die überprüft, ob eine gegebene Zahl gerade oder ungerade ist, und eine entsprechende Nachricht ausgibt.</p>
+<p>Tipp: Die <code>mod</code>-Funktion kann nützlich sein. Lesen Sie dafür die entsprechende Dokumentationsseite.</p>
+<p><strong>Übung: Palindrom-Überprüfung</strong>
+Schreiben Sie eine Funktion, die überprüft, ob ein gegebener String ein Palindrom ist, d.h., ob er von vorne und von hinten gleich gelesen wird.</p>
+<p><strong>Übung: Schachbrett-Muster</strong>
+Schreiben Sie eine Funktion, die ein Schachbrett-Muster mit den Zeichen "#" und " " erstellt. Die Größe des Schachbretts soll als Argument übergeben werden.</p>
+<p>Tipp: Mit folgendem Ausdruck erhalten Sie ein zweidimensionales Array, dessen Unter-Arrays mit Zahlen zwischen 0 und 7 (einschließlich) gefüllt sind und sich rotierend von der nächsten Zahl fortsetzen:</p>
+<pre><code>Array.fill(8, {arg x; Array.iota(8).rotate(x * -1)})
+</code></pre>
+<p>Zur Veranschaulichung evaluieren Sie den folgenden Block, der dieses zweidimensionale Array im Post-Window ausgibt:</p>
+<pre><code>(
+Array.fill(8, {arg x; Array.iota(8).rotate(x * -1)}).do {
+    arg row;
+    row.do {
+        arg col;
+        &quot;% &quot;.postf(col)
+    };
+    &quot;&quot;.postln
+}
+)
+</code></pre>
+<pre><code>// Ergebnis im Post-Window:
+
+0 1 2 3 4 5 6 7
+1 2 3 4 5 6 7 0
+2 3 4 5 6 7 0 1
+3 4 5 6 7 0 1 2
+4 5 6 7 0 1 2 3
+5 6 7 0 1 2 3 4
+6 7 0 1 2 3 4 5
+7 0 1 2 3 4 5 6
+</code></pre>
+<p>Für weitere Informationen zu Kontrollstrukturen suchen Sie in der Dokumentation nach "Control Structures"
+(<strong>Ctrl+Shift+D</strong> und nach dem Begriff suchen).</p></div>
             </div>
         </div>
 
