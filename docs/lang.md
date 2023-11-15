@@ -340,9 +340,18 @@ Schreiben Sie eine Funktion `~generateFibonacci`, die eine positive Ganzzahl n a
 
 ## Kontrollstrukturen
 
-Manchmal möchten wir Teile unseres Codes nur ausführen, wenn eine bestimmte Bedingung erfüllt ist. Das erreichen wir mithilfe der sogenannten [Kontrollstrukturen](https://de.wikipedia.org/wiki/Kontrollstruktur). Eines dieser Mittel ist das `if`-Statement, das die folgende Form hat:
+Manchmal möchten wir Teile unseres Codes nur ausführen, wenn eine bestimmte Bedingung erfüllt ist. Das erreichen wir mithilfe der sogenannten [Kontrollstrukturen](https://de.wikipedia.org/wiki/Kontrollstruktur). 
+### `if`
+Eines dieser Mittel ist das `if`-Statement, das die folgende Form hat:
 
-**(If (Bedingung ist erfüllt), {Dann evaluiere diese Funktion}, {Ansonsten evaluiere diese Funktion})** 
+```
+(
+if
+  (Bedingung ist erfüllt),
+  {Dann evaluiere diese Funktion},
+  {Ansonsten evaluiere diese Funktion}
+) 
+```
 
 Wir schauen uns ein Beispiel an: Wir testen den Wert einer Zufallszahl und möchten eine Zeile im Post-Fenster ausgeben lassen. Diese Zeile soll die Nachricht "Größer als Zehn" ausgeben, wenn unsere Zahl größer als 10 ist, und "Kleiner als Zehn" ausgeben, wenn die Zahl kleiner als 10 ist.
 
@@ -407,6 +416,65 @@ Array.fill(8, {arg x; Array.iota(8).rotate(x * -1)}).do {
 5 6 7 0 1 2 3 4
 6 7 0 1 2 3 4 5
 7 0 1 2 3 4 5 6
+```
+
+### `case`
+Wenn wir mehr als eine Bedingung testen möchten, um in jeder Situation anders vorzugehen, können wir die `case`-Konstruktion nutzen. Sie hat die folgende Form:
+
+```supercollider
+(
+case
+  // Kondition und Funktion 1
+  {Kondition 1 ist erfüllt} {evaluiere die Funktion 1}
+  // Kondition und Funktion 2
+  {Kondition 2 ist erfüllt} {evaluiere die Funktion 2}
+  // Kondition und Funktion 3
+  {Kondition 3 ist erfüllt} {evaluiere die Funktion 3}
+  // Diese Zeile wird nur evaluiert, wenn keine der Bedingungen oben erfüllt sind
+  {true} {sonst evaluiere diese Funktion}
+)
+```
+
+Ein Beispiel:
+```
+(
+// Testen, ob eine Zufallszahl zwischen 10 und 100 durch 7, 5 oder 3 teilbar ist
+var n = rrand(10, 100);
+case 
+    { n.mod(7) == 0 } { "% ist durch 7 teilbar".postf(n) }
+    { n.mod(5) == 0 } { "% ist durch 5 teilbar".postf(n) }
+    { n.mod(3) == 0 } { "% ist durch 3 teilbar".postf(n) }
+    { true } { "% ist durch 7, 5 und 3 nicht teilbar".postf(n) }
+)
+```
+
+**Übung: Tonart-Erkennung** Schreiben Sie mithilfe von `case` eine Funktion, die als Argument eine Sequenz von MIDI-Notennummern erhält. Das Programm soll diese Sequenz intervalle analysieren. Wenn diese Sequenz einer Dur- oder Moll-Tonleiter (*natürliches*,  *harmonisches* oder *melodisches* Moll, alle in aufsteigender Form) entspricht, soll die Funktion den Namen der Tonleiter als einen String zurückgeben. Andernfalls soll der String "Keine erkennbare Tonleiter" zurückgegeben werden.
+
+Tipp: Folgende Definitionen können Ihnen bei der Aufgabe nützlich sein:
+```
+(
+// Die Intervallmuster der Dur-Tonleiter und drei Varianten der Moll-Tonleiter
+~majorIntervals = [ 2, 2, 1, 2, 2, 2, 1 ];
+~nat_minorIntervals = [ 2, 1, 2, 2, 1, 2, 2 ];
+~harm_minorIntervals = [ 2, 1, 2, 2, 1, 3, 1 ];
+~mel_minorIntervals = [ 2, 1, 2, 2, 2, 2, 1 ];
+
+// Bekommt ein Array von Zahlen (arg nums) und gibt ein Array von
+// Intervallen zwischen zwei benachbarten Zahlen aus
+~getIntervals = {
+	arg nums;
+	var intervals = Array.new(nums.size - 1);
+	nums.doAdjacentPairs({arg a, b; intervals.add(b - a)});
+	intervals
+}
+)
+```
+Tipp: Die Funktion `midiname` erhält eine Zahl und gibt den Namen der Note mit der MIDI-Nummer aus.
+
+Tipp: String-Konkatenation können wir mit dem `++`-Operator erreichen:
+
+```supercollider
+"Super" ++ "Collider" // -> "SuperCollider"
 ```
 
 Für weitere Informationen zu Kontrollstrukturen suchen Sie in der Dokumentation nach "Control Structures"
