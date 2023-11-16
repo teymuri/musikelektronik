@@ -6,6 +6,7 @@ Im letzten Kapitel haben wir uns mit der Sprache SuperCollider beschäftigt. Die
 ```
 s.boot;
 ```
+## Der Klang der Sinusschwingung (`Hello World!`)
 Aus historischen Gründen werden in SuperCollider auch die Objekte, die für die Klangerzeugung verantwortlich sind, als "UGen" bezeichnet. Eine dieser UGens ist SinOsc, die eine einfache Sinusschwingung generiert. Die meisten UGens in SuperCollider benötigen Informationen von uns (ähnlich wie Argumente in Funktionen im letzten Kapitel). Zum Beispiel benötigt unser SinOsc UGen folgende Eingaben: Frequenz, Phase, Amplitude und DC-Offset. Geben Sie den folgenden Code in Ihren SuperCollider-Editor ein. Sobald Sie die Klammer öffnen, sollten Sie diese Argumente sehen können. Achten Sie darauf, dass diese Argumente auch Standardwerte haben, so dass, wenn wir keine Informationen bereitstellen, diese Standardwerte übernommen werden:
 
 ```supercollider
@@ -113,11 +114,19 @@ y.set(\freq, 220);
 y.free;
 ```
 
+## Verschachtelung der UGens
 Das Verständnis eines Prinzips ist hier von Bedeutung: auch die UGens (wie alles andere auf unserem Rechner!) arbeiten ausschließlich mit Zahlen! Das bedeutet, ihre Ausgabe besteht ausschließlich aus Zahlen.
 Wenn wir in eine Sinusschwingung in einem DAW-Programm (hier [Audacity](https://www.audacityteam.org/)) ausreichend hineinzoomen, können wir die einzelnen Sample-Werte (die Amplitudenwerte unseres Sinustons, Dezimalzahlen) sehen:
 ![Samples Sinus Audacity](pix/sinus-audacity-samples.jpg)
 
-Dies ermöglicht es uns, eine weitere UGen als Argument für unsere SinOsc UGen einzusetzen. Dadurch wird ein kontinuierlicher Datenstrom an Zahlen an die Haupt-UGen gesendet, die dann als Frequenz (oder auch andere Parameter) interpretiert werden können. Ein Beispiel:
+Da die UGens schließlich nur Zahlen ausgeben, können wir sämtliche mathematische Funktionen, die wir auf Zahlen anwenden können, auch auf UGens anwenden. Schauen Sie sich das folgende Beispiel an und erklären Sie, was Sie im Post-Fenster sehen:
+
+```supercollider
+{(SinOsc.ar(1).poll(label: \Sin) * 10).poll(label: \SinX10)}.play
+```
+
+
+Diese Eigenschaft der UGens ermöglicht es uns, eine weitere UGen als Argument für unsere SinOsc UGen einzusetzen. Dadurch wird ein kontinuierlicher Datenstrom an Zahlen an die Haupt-UGen gesendet, die dann als Frequenz (oder auch andere Parameter) interpretiert werden können. Ein Beispiel:
 
 ```supercollider
 (
