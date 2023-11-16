@@ -83,26 +83,41 @@ Wir können unserer Funktion Argumente hinzufügen, sodass wir die Parameter uns
 ```supercollider
 (
 x = {
-	arg freq = 440, amp = 0.5;
+	arg freq = 100, amp = 0.5;
 	SinOsc.ar(freq, mul: amp)
 }
 )
 ```
 
 So können wir durch die `set`-Methode unserer Synth-Instanzen die Frequenz oder die Amplitude neu setzen, und das während der Synth läuft (also während unser Sinuston weiter erklingt):
+```
+// Wir können uns den Plot unserer Funktion ansehen 
+// (für 0.1 Sekunden, was mit unserer Funktionsfrequenz von 100 Hz 10 Schwingungsperioden entspricht)
+x.plot(0.1);
+```
+![Plot des Sinus-Oszillators](pix/plot1.jpg)
 
+**Übung: **Versuchen Sie, verschiedene Parameter einer Funktion mit einer Sinus-Schwingung zu verändern (z.B. Phase, Amplitude, Offset) und verfolgen Sie die Unterschiede im resultierenden Plot.
 ```supercollider
 // Funktion abspielen
-x.play;
+// Den resultierenden Prozess in einer Variablen speichern
+y = x.play;
 
 // Amplitude halbieren
-x.set(\amp, 0.25);
+y.set(\amp, 0.25);
 
 // Die Frequenz um eine Oktave tiefer spielen
-x.set(\freq, 220);
+y.set(\freq, 220);
+
+// Und den Prozess ausschalten
+y.free;
 ```
 
-Das Verständnis eines Prinzips ist hier von Bedeutung: auch die UGens (wie alles andere auf unserem Rechner!) arbeiten ausschließlich mit Zahlen! Das bedeutet, ihre Ausgabe besteht ausschließlich aus Zahlen. Das ermöglicht es uns, eine weitere UGen als Argument für unsere SinOsc UGen einzusetzen. Dadurch wird ein kontinuierlicher Datenstrom an Zahlen an die Haupt-UGen gesendet, die dann als Frequenz (oder auch andere Parameter) interpretiert werden können. Ein Beispiel:
+Das Verständnis eines Prinzips ist hier von Bedeutung: auch die UGens (wie alles andere auf unserem Rechner!) arbeiten ausschließlich mit Zahlen! Das bedeutet, ihre Ausgabe besteht ausschließlich aus Zahlen.
+Wenn wir in eine Sinusschwingung in einem DAW-Programm (hier [Audacity](https://www.audacityteam.org/)) ausreichend hineinzoomen, können wir die einzelnen Sample-Werte (die Amplitudenwerte unseres Sinustons, Dezimalzahlen) sehen:
+![Samples Sinus Audacity](pix/sinus-audacity-samples.jpg)
+
+Dies ermöglicht es uns, eine weitere UGen als Argument für unsere SinOsc UGen einzusetzen. Dadurch wird ein kontinuierlicher Datenstrom an Zahlen an die Haupt-UGen gesendet, die dann als Frequenz (oder auch andere Parameter) interpretiert werden können. Ein Beispiel:
 
 ```supercollider
 (
@@ -126,6 +141,8 @@ Modulieren Sie die Frequenz eines Sinus-Oszillators mit einem LFO (Low-Frequency
 Sie dürfen die Frequenz des LFO bestimmen. Verwenden Sie einen LFO um unterschiedliche Parameter einesOszillators zu
 modulieren.
 
+
+
 ## Mehrkanal-Erweiterung
 
 Viele UGens in SuperCollider unterstützen eine Eigenschaft namens [Multiple Dispatching](https://de.wikipedia.org/wiki/Multimethode). Was dies vereinfacht bedeutet, ist, dass das Verhalten der UGens je nach Typ ihrer Argumente unterschiedlich sein wird. Zum Beispiel können wir einem Sinus-Oszillator nicht nur eine Zahl als Argument für einen seiner Parameter angeben, sondern auch ein Array von Zahlen. Was dann passiert, ist, dass SuperCollider die Angabe des Arrays als Argument interpretiert, als eine Liste von Ausgängen (z.B. eine Liste von Lautsprechern), und generiert so viele Signale wie die Größe des Arrays und sendet sie an die Lautsprecher. Schauen wir uns dazu ein Beispiel an, indem wir ein Signal-Array vom selben Sinus-Oszillator mit unterschiedlichen Amplituden generieren. Dazu betrachten wir den sogenannten "Server Meter", der uns die Signalwege In und Out vom SuperCollider-Server anzeigt. Drücken Sie die Tastenkombination **Ctrl-M** oder klicken Sie im Editor unter dem Server-Menu auf **Server > Show Server Meter**.
@@ -141,6 +158,7 @@ Jetzt evaluieren Sie folgenden Code:
 )
 ```
 
+
 **Übung: Beschreibung**
 Erklären Sie, was Sie im Server Meter sehen, und den Grund dafür.
 
@@ -150,3 +168,36 @@ Senden Sie an Ihre Funktion statt `play` die Nachricht `value`, um die Funktion 
 Die Ausgabe ist ein Array von UGens.
 
 Beachten Sie, dass es in diesem Kontext ausreicht, wenn eines der Argumente anstelle einer Zahl ein Array ist, um eine entsprechende Array von Ausgängen zurückzubekommen.
+Wenn ein Array mit 2 Zahlen als Argument an unsere UGen übergeben wird, resultiert dies in einem Array mit zwei Kopien derselben UGen.
+
+Achten Sie darauf, dass das Ergebnis des obigen Codes exakt gleich dem unteren ist:
+```
+(
+{
+    var sig = SinOsc.ar(200);
+	// Das Signal als ein Array an den Server senden.
+	// Der Server wird dann die Signale in einem Array an
+	// physikalischen Ausgängen (Lautsprechern) abbilden,
+	// so dass das erste Signal am Lautsprecher 1, das
+	// zweite am Lautsprecher 2 usw. gesendet wird.
+	[sig * 0.01, sig * 0.3]
+}.play;
+)
+```
+*Fazit: Der Server interpretiert ein Array als Mehrkanalklang.*
+
+Es gibt verschiedene syntaktische Möglichkeiten, UGens zu vervielfältigen. Einige dieser Möglichkeiten sind hier aufgelistet:
+
+Die `dup` Funktion erhält zwei Argumente: ein Element und die Anzahl, wie oft dieses Element vervielfältigt werden soll (nennen wir diese Anzahl N). Sie gibt ein N-Tuple-Array mit Kopien des Elements zurück:
+
+```supercollider
+"Ein String".dup() // -> [ EinString, EinString ]
+SinOsc.ar.dup(2) // -> [ SinOsc, SinOsc ]
+```
+
+Eine alternative Schreibweise für `dup` ist der Duplizierungsoperator `!`:
+
+```supercollider
+"Ein String" ! 2 // -> [ EinString, EinString ]
+SinOsc.ar ! 2 // -> [ SinOsc, SinOsc ]
+```
