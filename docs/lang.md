@@ -469,7 +469,7 @@ Tipp: Folgende Definitionen können Ihnen bei der Aufgabe nützlich sein:
 }
 )
 ```
-Tipp: Die Funktion `midiname` erhält eine Zahl und gibt den Namen der Note mit der MIDI-Nummer aus.
+Tipp: Die Funktion `midiname` erhält eine Zahl und gibt den Namen der MIDI-Nummer als einen String aus.
 
 Tipp: String-Konkatenation können wir mit dem `++`-Operator erreichen:
 
