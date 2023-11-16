@@ -98,6 +98,14 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-level="2"><a href="#der-klang-der-sinusschwingung-hello-world" class="nav-link">Der Klang der Sinusschwingung (Hello World!)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#verschachtelung-der-ugens" class="nav-link">Verschachtelung der UGens</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-level="2"><a href="#mehrkanal-erweiterung" class="nav-link">Mehrkanal-Erweiterung</a>
               <ul class="nav flex-column">
               </ul>
@@ -114,6 +122,7 @@
 <p>Im letzten Kapitel haben wir uns mit der Sprache SuperCollider beschäftigt. Die Sprache allein kann keinen Klang erzeugen, sondern ist lediglich für die Weitergabe unserer Befehle an den Klang-Server verantwortlich. Um unseren ersten Ton in SuperCollider zu erzeugen, müssen wir zuerst den Server starten. Erinnern wir uns daran, dass die Einzelvariabel "s" für den Server steht. Mit dem Aufrufen des <code>boot</code>-Befehls starten wir ihn:</p>
 <pre><code>s.boot;
 </code></pre>
+<h2 id="der-klang-der-sinusschwingung-hello-world">Der Klang der Sinusschwingung (<code>Hello World!</code>)</h2>
 <p>Aus historischen Gründen werden in SuperCollider auch die Objekte, die für die Klangerzeugung verantwortlich sind, als "UGen" bezeichnet. Eine dieser UGens ist SinOsc, die eine einfache Sinusschwingung generiert. Die meisten UGens in SuperCollider benötigen Informationen von uns (ähnlich wie Argumente in Funktionen im letzten Kapitel). Zum Beispiel benötigt unser SinOsc UGen folgende Eingaben: Frequenz, Phase, Amplitude und DC-Offset. Geben Sie den folgenden Code in Ihren SuperCollider-Editor ein. Sobald Sie die Klammer öffnen, sollten Sie diese Argumente sehen können. Achten Sie darauf, dass diese Argumente auch Standardwerte haben, so dass, wenn wir keine Informationen bereitstellen, diese Standardwerte übernommen werden:</p>
 <pre><code class="language-supercollider">SinOsc.ar();
 </code></pre>
@@ -190,10 +199,14 @@ y.set(\freq, 220);
 // Und den Prozess ausschalten
 y.free;
 </code></pre>
+<h2 id="verschachtelung-der-ugens">Verschachtelung der UGens</h2>
 <p>Das Verständnis eines Prinzips ist hier von Bedeutung: auch die UGens (wie alles andere auf unserem Rechner!) arbeiten ausschließlich mit Zahlen! Das bedeutet, ihre Ausgabe besteht ausschließlich aus Zahlen.
 Wenn wir in eine Sinusschwingung in einem DAW-Programm (hier <a href="https://www.audacityteam.org/">Audacity</a>) ausreichend hineinzoomen, können wir die einzelnen Sample-Werte (die Amplitudenwerte unseres Sinustons, Dezimalzahlen) sehen:
 <img alt="Samples Sinus Audacity" src="../pix/sinus-audacity-samples.jpg" /></p>
-<p>Dies ermöglicht es uns, eine weitere UGen als Argument für unsere SinOsc UGen einzusetzen. Dadurch wird ein kontinuierlicher Datenstrom an Zahlen an die Haupt-UGen gesendet, die dann als Frequenz (oder auch andere Parameter) interpretiert werden können. Ein Beispiel:</p>
+<p>Da die UGens schließlich nur Zahlen ausgeben, können wir sämtliche mathematische Funktionen, die wir auf Zahlen anwenden können, auch auf UGens anwenden. Schauen Sie sich das folgende Beispiel an und erklären Sie, was Sie im Post-Fenster sehen:</p>
+<pre><code class="language-supercollider">{(SinOsc.ar(1).poll(label: \Sin) * 10).poll(label: \SinX10)}.play
+</code></pre>
+<p>Diese Eigenschaft der UGens ermöglicht es uns, eine weitere UGen als Argument für unsere SinOsc UGen einzusetzen. Dadurch wird ein kontinuierlicher Datenstrom an Zahlen an die Haupt-UGen gesendet, die dann als Frequenz (oder auch andere Parameter) interpretiert werden können. Ein Beispiel:</p>
 <pre><code class="language-supercollider">(
     { SinOsc.ar(SinOsc.kr(1, mul: 100, add: 400)) }.play
 )
