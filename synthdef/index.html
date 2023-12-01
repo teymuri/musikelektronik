@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="https://teymuri.github.io/musikelektronik/lit/">
+        <link rel="canonical" href="https://teymuri.github.io/musikelektronik/synthdef/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Literatur - Übung Elektronische Musik</title>
+        <title>Instrumente definieren mit SynthDef - Übung Elektronische Musik</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -37,7 +37,7 @@
                             <li class="navitem">
                                 <a href="../kontakt/" class="nav-link">Kontakt</a>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Übersicht <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
@@ -54,14 +54,14 @@
 </li>
             
 <li>
-    <a href="../synthdef/" class="dropdown-item">Instrumente definieren mit SynthDef</a>
+    <a href="./" class="dropdown-item active">Instrumente definieren mit SynthDef</a>
 </li>
     </ul>
   </li>
                                 </ul>
                             </li>
-                            <li class="navitem active">
-                                <a href="./" class="nav-link">Literatur</a>
+                            <li class="navitem">
+                                <a href="../lit/" class="nav-link">Literatur</a>
                             </li>
                         </ul>
 
@@ -72,12 +72,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../synthdef/" class="nav-link">
+                                <a rel="prev" href="../first_sounds/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
+                                <a rel="next" href="../lit/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -99,13 +99,9 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#literatur" class="nav-link">Literatur</a>
+            <li class="nav-item" data-level="1"><a href="#instrumente-definieren-mit-synthdef" class="nav-link">Instrumente definieren mit SynthDef</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#artikel" class="nav-link">Artikel</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#bucher" class="nav-link">Bücher</a>
+            <li class="nav-item" data-level="2"><a href="#einfuhrung-in-synth" class="nav-link">Einführung in Synth</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -116,17 +112,94 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="literatur">Literatur</h1>
-<p>Auf dieser Seite wird auf einige lesenswerte Artikel und Bücher mit Themenschwerpunkten im Bereich der elektronischen und algorithmischen Musik verwiesen.</p>
-<h2 id="artikel">Artikel</h2>
-<ul>
-<li><a href="../pdf/meyer-eppler_elektronische-kompositionstechnik.pdf">W. Meyer-Eppler: Elektronische Kompositionstechnik (1953)</a></li>
-<li><a href="../pdf/eimert_sinus-ton.pdf">H. Eimert, Der Sinus-Ton (1954)</a></li>
-</ul>
-<h2 id="bucher">Bücher</h2>
-<ul>
-<li><a href="https://link.springer.com/book/10.1007/978-3-211-75540-2">G. Nierhaus:  Algorithmic Composition, Paradigms of Automated Music Generation</a></li>
-</ul></div>
+<h1 id="instrumente-definieren-mit-synthdef">Instrumente definieren mit SynthDef</h1>
+<h2 id="einfuhrung-in-synth">Einführung in Synth</h2>
+<p>In diesem Kapitel lernen wir die Kernelemente der Klanggenerierung auf dem SuperCollider-Server kennen. Diese tragen den Namen "Synth" (für Synthesize). Jedes Mal, wenn wir in unserem letzten Kapitel eine Funktion mit einer SinOsc UGen abgespielt haben, hat der SuperCollider-Server hinter den Kulissen einen Synth generiert. Das konnten wir auch im Post-Fenster sehen, wenn wir auf unsere Funktion die Methode <code>play</code> angewendet haben:</p>
+<pre><code class="language-supercollider">{SinOsc.ar(mul: 0.2)}.play
+</code></pre>
+<p>Im Post-Fenster sehen wir etwas wie <strong>-&gt; Synth('temp__0' : 1000)</strong>, eine Darstellung des frisch für uns generierten Synths, der hier den Namen <code>temp__0</code> und eine ID-Nummer 1000 trägt (Dies kann bei Ihnen anders aussehen).</p>
+<p>Wenn wir unsere Funktionsargumente definieren, können wir mit dem entstehenden Synth kommunizieren:</p>
+<pre><code class="language-supercollider">y = {arg freq=440, amp=0.2; SinOsc.ar(freq: freq, mul: amp)}.play
+</code></pre>
+<p>Eine Veränderung der Frequenz:</p>
+<pre><code class="language-supercollider">y.set(\freq, 330)
+</code></pre>
+<p>oder Veränderung der Amplitude:</p>
+<pre><code class="language-supercollider">y.set(\amp, 0.2)
+</code></pre>
+<p>können wir durch die <code>set</code> Methode der Synth-Klasse vornehmen.</p>
+<p>Wir lassen unseren Synth geschmeidig über eine Sekunde ausklingen:</p>
+<pre><code class="language-supercollider">y.release(1)
+</code></pre>
+<p>Wir definieren einen ähnlichen Synth selbst! Das Erstellen von Synths geschieht durch die SynthDef-Klasse, wie folgt. Evaluieren Sie den folgenden Block. Im Post-Fenster sehen wir, dass unser Synth erfolgreich für den Server definiert wurde (<code>-&gt; SynthDef:meinSynth</code>):</p>
+<pre><code class="language-supercollider">(
+SynthDef(\meinSynth, {
+    arg freq=440, amp=0.2;
+    Out.ar(0, SinOsc.ar(freq: freq, mul: amp))
+}).add
+)
+</code></pre>
+<p>Ich gehe jede Zeile der obigen Synth-Definition durch:</p>
+<pre><code class="language-supercollider">(
+// Mit der SynthDef-Klasse definieren wir den Synth. Das erste Argument ist der Name, den wir unserem
+// Synth geben möchten (hier meinSynth). Dieses Argument kann entweder vom Typ Symbol sein (wie \meinSynth) oder ein String (wie &quot;meinSynth&quot;).
+SynthDef(\meinSynth, 
+    // Das zweite Argument ist eine Funktion, die definiert, wie wir Ugens zusammen kombinieren
+    // möchten, um unser Instrument zu bauen.
+    {
+        // Argumente für die Funktion.
+        arg freq=440, amp=0.2;
+        // Es gibt hier einen großen Unterschied zu unserer {}.play Form früher. Da hatte für uns 
+        // SuperCollider entschieden, dass unser Signal zum ersten (linken) Kanal rausgeschickt wird.
+        // Beim Definieren eines Instruments durch SynthDef müssen wir dem Instrument genau mitteilen,
+        // zu welchem Ausgang unser Signal rausgeschickt werden soll. Dafür nutzen wir ein UGen
+        // namens Out und instanzieren es mit der ar Methode. Das erste Argument dazu bestimmt 
+        // die Nummer des Ausgangskanals (mit 0 für ersten Kanal, 1 für zweiten Kanal usw.). Das 
+        // zweite Argument bestimmt das eigentliche Signal (also wie unser Instrument klingen wird).
+        Out.ar(0, SinOsc.ar(freq: freq, mul: amp))
+    }
+    // Nachdem wir mit der Definition unserer Synth-Funktion fertig sind, müssen wir durch
+    // die add Methode unser Instrument der Liste der für den Server bekannten Synths 
+    // hinzufügen:
+).add
+)
+</code></pre>
+<p>Ab jetzt können wir unser Instrument zum Erklingen bringen (wir geben unserer Synth-Instanz den Namen <code>x</code>, damit wir die Parameter des Instruments mit <code>set</code> modifizieren können). Dafür schreiben wir:</p>
+<pre><code class="language-supercollider">x = Synth(\meinSynth)
+x.set(\freq, 220)
+x.set(\amp, 0.1)
+x.free
+
+x.defName // -&gt; meinSynth
+</code></pre>
+<p>Sinnvollerweise sind wir in der Lage, den Ausgangskanal (das erste Argument zu dem Out Ugen) ebenfalls als ein Argument für unsere Synth-Funktion zu definieren. So können wir für jede einzelne Instanz unseres Instruments einen anderen physischen Kanal auswählen. Dafür modifiziere ich die obige Definition folgendermaßen:</p>
+<pre><code class="language-supercollider">(
+SynthDef(\meinSynth, {
+    arg freq=440, amp=0.2, kanal=0;
+    Out.ar(kanal, SinOsc.ar(freq: freq, mul: amp))
+}).add
+)
+</code></pre>
+<p>Jetzt können wir das Signal von links nach rechts schicken:</p>
+<pre><code class="language-supercollider">x = Synth(\meinSynth)
+x.set(\kanal, 1)
+x.free
+</code></pre>
+<p>Die Synth-Klasse erlaubt es uns, die Argumente unserer Synth-Funktion schon beim Kreieren des Instruments zu übergeben. Dafür übergeben wir als das zweite Argument zum Synth ein Array mit Namen der Funktionsargumente (als Symbole oder Strings) und die Werte, getrennt durch Komma:</p>
+<pre><code class="language-supercollider">Synth(\meinSynth, [\freq, 220, \amp, 0.1, \kanal, 1])
+</code></pre>
+<p>Wir können durch mehrere Instanzen unseres Instruments mit jeweils unterschiedlichen Parametern erstellen.</p>
+<p><strong>Übung:</strong> Evaluieren Sie den folgenden Block. Versuchen Sie zu beschreiben, was dort passiert:</p>
+<pre><code class="language-supercollider">(
+var n = 40;
+n.do {
+    arg x;
+    Synth(\meinSynth, [\freq, 220 + (x * 2), \amp, n.reciprocal, \kanal: 0.rrand(1)])
+}
+)
+</code></pre>
+<p><strong>Übung:</strong> Interferenz zweier naher Frequenzen</p>
+<p>Nutzen Sie unser Wissen aus dem letzten Kapitel über die Mehrkanalerweiterung, um ein Instrument zu definieren, das auf den rechten und linken Kanälen zwei leicht unterschiedliche Frequenzen erklingen lässt. Verwenden Sie dafür den UGen "Saw" (ein Sägezahn-Oszillator). Verwenden Sie für den linken Kanal eine Frequenz von 40 Hz und auf dem rechten Kanal eine Frequenz von 41 Hz. Setzen Sie die Amplitude des Sägezahns auf den Wert 0.2.</p></div>
             </div>
         </div>
 
