@@ -1,4 +1,4 @@
-site_name: Übung Elektronische Musik
+site_name: Seminar/Übung Musikelektronik
 extra_css:
   - style.css
 site_url: https://teymuri.github.io/musikelektronik/
@@ -9,4 +9,5 @@ nav:
     - Wintersemester:
       - Sprache: lang.md
       - Die ersten Töne: first_sounds.md
+      - Instrumente definieren mit SynthDef: synthdef.md
   - Literatur: lit.md
