@@ -4,7 +4,7 @@
 Das Ziel dieser Übung ist das Kennenlernen und Erproben der Möglichkeiten der elektronischen Musik in Theorie und Praxis anhand eines gemeinsam zu erarbeitenden Musikbeispiels. Die Analyse von Werken aus dem Repertoire ist ebenfalls ein Schwerpunkt dieses Seminars.
 
 - Titel (dt.) der konkreten Lehrveranstaltung: Elektronische Musik + Musik-Elektronik
-- Veranstaltungsart: Übung (anmeldepflichtig)
+- Veranstaltungsart: Seminar/Übung (anmeldepflichtig)
 - Semesterwochenstunden (SWS): 2
 - Leistungspunkte (ECTS): 2
 
