@@ -92,7 +92,7 @@ x = {
 
 So können wir durch die `set`-Methode unserer Synth-Instanzen die Frequenz oder die Amplitude neu setzen, und das während der Synth läuft (also während unser Sinuston weiter erklingt):
 ```
-// Wir können uns den Plot unserer Funktion ansehen 
+// Wir können uns den Plot unserer Funktion ansehen
 // (für 0.1 Sekunden, was mit unserer Funktionsfrequenz von 100 Hz 10 Schwingungsperioden entspricht)
 x.plot(0.1);
 ```
@@ -171,8 +171,13 @@ Jetzt evaluieren Sie folgenden Code:
 **Übung: Beschreibung**
 Erklären Sie, was Sie im Server Meter sehen, und den Grund dafür.
 
+**Übung: Simulation des Klanges einer Klarinette** [Lösung](loesungen.md#Übung: Simulation des Klanges einer Klarinette)
+
+Die vollständige harmonische Reihe besteht aus den Frequenzen fo, 2fo, 3fo, 4fo, 5fo usw., wobei f0 die Grundfrequenz ist. Die Klarinette spielt (ungefähr) nur die ungeraden Mitglieder der Serie. Simulieren Sie den Klang einer Klarinette mit einem einzigen `SinOsc` und einem Array für die `freq`- und `mul`-Argumente. Verwenden Sie zunehmend kleinere Werte für die Amplitude höherer Teiltöne des Klangs. Tipp: Dies lässt sich sehr einfach mit den Array-Klassenmethoden `series` und `geom` implementieren. Da wir im Grunde genommen mehrere Instanzen des `SinOsc`-UGen erzeugen, indem wir Arrays übergeben, können wir mithilfe der `Mix`-Klasse dieses End-Array in ein Stereosignal (ein Array mit zwei Elementen) zusammenfassen (`Mix` erzeugt die Summe aller Signale in seinem Argument; suchen Sie mit **Ctrl+Shift+D** nach der Dokumentationsseite: `Mix`).
+
+
 **Übung: Generierung eines Intervals**
-Generieren Sie ein Quint-Intervall mit den beiden Tönen A (440 Hz) und der Quinte darüber. 
+Generieren Sie ein Quint-Intervall mit den beiden Tönen A (440 Hz) und der Quinte darüber.
 Senden Sie an Ihre Funktion statt `play` die Nachricht `value`, um die Funktion zu evaluieren, anstatt den Ausgabewert an den Server für Klanggenerierung zu leiten.
 Die Ausgabe ist ein Array von UGens.
 

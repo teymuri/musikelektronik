@@ -50,13 +50,13 @@ Die Klassen werden durch ihre Eigenschaften voneinander unterschieden. Wir könn
 > **Achtung**
 >
 > Wenn es sich bei der Eigenschaft um eine Funktion handelt, ist diese Schreibweise:
-> 
+>
 > ```
 > Klasse.Funktion
 > ```
-> 
-> äquivalent zu:  
-> 
+>
+> äquivalent zu:
+>
 > ```
 > Funktion(Klasse)
 > ```
@@ -162,6 +162,12 @@ Ein weiteres Beispiel ist die Funktion `linlin`, bei der eine Zahl aus einem lin
 ```
 0.5.linlin(0, 1, 10, 20)
 ```
+
+
+
+> **Hinweis**
+Viele Klassen in SuperCollider verfügen über sogenannte Klassenmethoden. Diese Funktionen werden auf die Klasse selbst angewendet und nicht, wie in unseren bisherigen Beispielen, auf eine Instanz der Klasse. Zum Beispiel besitzt die Klasse Array die Klassenmethode `geom`, mit der eine geometrische Reihe erzeugt werden kann. Der Aufruf einer Klassenmethode erfolgt wie folgt: ```Array.geom(10, 1, 2)```
+> Dies erzeugt ein Array mit 10 Elementen, wobei das erste Element 1 ist und jedes weitere Element die Verdopplung des vorherigen Elements darstellt: `[ 1, 2, 4, 8, 16, 32, 64, 128, 256, 512 ]` (siehe auch: [https://de.wikipedia.org/wiki/Geometrische_Reihe]()). Für weitere Beispiele der Klassenmethoden der Array-Klasse werfen Sie einen Blick auf die Dokumentationsseite *Array/Class Methods*.
 
 Wir können auch unsere eigenen Funktionen definieren. Unten habe ich alle Zeilen innerhalb eines Code-Blocks (runden Klammern) platziert, um sie alle zusammen evaluieren zu können. Ich verwende auch einen globalen Namen (mit einer Tilde), da ich von überall auf meine Funktion zugreifen möchte. Die Funktion erhält zwei Zahlen als Argumente und evaluiert zu ihrer Summe der Quadratzahlen.
 
@@ -298,14 +304,14 @@ Definieren Sie zwei globale Variablen `~majorPattern` und `~minorPattern`. Defin
 
 
 ## Iterieren mit `do` und `collect`
-In SuperCollider ist das Iterieren über Listen und Arrays und das Sammeln von Ergebnissen eine wichtige Technik, um komplexe Operationen auf Daten auszuführen. Die Methoden `do` und `collect` sind dabei sehr hilfreich. 
+In SuperCollider ist das Iterieren über Listen und Arrays und das Sammeln von Ergebnissen eine wichtige Technik, um komplexe Operationen auf Daten auszuführen. Die Methoden `do` und `collect` sind dabei sehr hilfreich.
 
 ### Das `do`-Muster
 Die Methode `do` wird verwendet, um über die Elemente einer Liste oder Array zu iterieren und eine Aktion auf jedes Element auszuführen. Zum Beispiel:
 
 ```supercollider
 // Iteriert über die Array und zeigt jedes Element im Post-Window
-[1, 2, 3, 4, 5].do { 
+[1, 2, 3, 4, 5].do {
     arg element;
     element.postln;
 }
@@ -319,7 +325,7 @@ Die Methode `collect` wird verwendet, um eine neue Liste/Array zu erstellen, ind
 ```supercollider
 // Erstellt eine neue Array/Liste, in der jedes Element um 10 erhöht ist
 var originalList = [1, 2, 3, 4, 5];
-var newList = originalList.collect { 
+var newList = originalList.collect {
    arg element;
    element + 10;
 };
@@ -340,7 +346,7 @@ Schreiben Sie eine Funktion `~generateFibonacci`, die eine positive Ganzzahl n a
 
 ## Kontrollstrukturen
 
-Manchmal möchten wir Teile unseres Codes nur ausführen, wenn eine bestimmte Bedingung erfüllt ist. Das erreichen wir mithilfe der sogenannten [Kontrollstrukturen](https://de.wikipedia.org/wiki/Kontrollstruktur). 
+Manchmal möchten wir Teile unseres Codes nur ausführen, wenn eine bestimmte Bedingung erfüllt ist. Das erreichen wir mithilfe der sogenannten [Kontrollstrukturen](https://de.wikipedia.org/wiki/Kontrollstruktur).
 ### `if`
 Eines dieser Mittel ist das `if`-Statement, das die folgende Form hat:
 
@@ -350,7 +356,7 @@ if
   (Bedingung ist erfüllt),
   {Dann evaluiere diese Funktion},
   {Ansonsten evaluiere diese Funktion}
-) 
+)
 ```
 
 Wir schauen uns ein Beispiel an: Wir testen den Wert einer Zufallszahl und möchten eine Zeile im Post-Fenster ausgeben lassen. Diese Zeile soll die Nachricht "Größer als Zehn" ausgeben, wenn unsere Zahl größer als 10 ist, und "Kleiner als Zehn" ausgeben, wenn die Zahl kleiner als 10 ist.
@@ -370,7 +376,7 @@ if (
 )
 ```
 
-**Übung:** 
+**Übung:**
 Schreiben Sie eine Funktion namens `randomColor`, die 50% der Zeit den String "Rot" und 50% der Zeit den String "Gelb" ausgibt.
 
 Tipp: Nutzen Sie die eingebaute Funktion `coin`. Diese Funktion erhält eine Zahl zwischen 0 und 1 als Argument und gibt mit der angegebenen Wahrscheinlichkeit die booleschen Werte `true` oder `false` aus. Zum Beispiel wird `1.coin` immer `true` ausgeben, während `0.coin` immer zu `false` evaluiert wird.
@@ -440,7 +446,7 @@ Ein Beispiel:
 (
 // Testen, ob eine Zufallszahl zwischen 10 und 100 durch 7, 5 oder 3 teilbar ist
 var n = rrand(10, 100);
-case 
+case
     { n.mod(7) == 0 } { "% ist durch 7 teilbar".postf(n) }
     { n.mod(5) == 0 } { "% ist durch 5 teilbar".postf(n) }
     { n.mod(3) == 0 } { "% ist durch 3 teilbar".postf(n) }
