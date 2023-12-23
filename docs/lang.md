@@ -167,7 +167,7 @@ Ein weiteres Beispiel ist die Funktion `linlin`, bei der eine Zahl aus einem lin
 
 > **Hinweis**
 Viele Klassen in SuperCollider verfügen über sogenannte Klassenmethoden. Diese Funktionen werden auf die Klasse selbst angewendet und nicht, wie in unseren bisherigen Beispielen, auf eine Instanz der Klasse. Zum Beispiel besitzt die Klasse Array die Klassenmethode `geom`, mit der eine geometrische Reihe erzeugt werden kann. Der Aufruf einer Klassenmethode erfolgt wie folgt: ```Array.geom(10, 1, 2)```
-> Dies erzeugt ein Array mit 10 Elementen, wobei das erste Element 1 ist und jedes weitere Element die Verdopplung des vorherigen Elements darstellt: `[ 1, 2, 4, 8, 16, 32, 64, 128, 256, 512 ]` (siehe auch: [https://de.wikipedia.org/wiki/Geometrische_Reihe]()). Für weitere Beispiele der Klassenmethoden der Array-Klasse werfen Sie einen Blick auf die Dokumentationsseite *Array/Class Methods*.
+> Dies erzeugt ein Array mit 10 Elementen, wobei das erste Element 1 ist und jedes weitere Element die Verdopplung des vorherigen Elements darstellt: `[ 1, 2, 4, 8, 16, 32, 64, 128, 256, 512 ]` (siehe auch: [Geometrische Reihe](https://de.wikipedia.org/wiki/Geometrische_Reihe)). Für weitere Beispiele der Klassenmethoden der Array-Klasse werfen Sie einen Blick auf die Dokumentationsseite *Array/Class Methods*.
 
 Wir können auch unsere eigenen Funktionen definieren. Unten habe ich alle Zeilen innerhalb eines Code-Blocks (runden Klammern) platziert, um sie alle zusammen evaluieren zu können. Ich verwende auch einen globalen Namen (mit einer Tilde), da ich von überall auf meine Funktion zugreifen möchte. Die Funktion erhält zwei Zahlen als Argumente und evaluiert zu ihrer Summe der Quadratzahlen.
 

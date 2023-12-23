@@ -187,7 +187,7 @@ x = {
 )
 </code></pre>
 <p>So können wir durch die <code>set</code>-Methode unserer Synth-Instanzen die Frequenz oder die Amplitude neu setzen, und das während der Synth läuft (also während unser Sinuston weiter erklingt):</p>
-<pre><code>// Wir können uns den Plot unserer Funktion ansehen 
+<pre><code>// Wir können uns den Plot unserer Funktion ansehen
 // (für 0.1 Sekunden, was mit unserer Funktionsfrequenz von 100 Hz 10 Schwingungsperioden entspricht)
 x.plot(0.1);
 </code></pre>
@@ -241,8 +241,10 @@ modulieren.</p>
 </code></pre>
 <p><strong>Übung: Beschreibung</strong>
 Erklären Sie, was Sie im Server Meter sehen, und den Grund dafür.</p>
+<p><strong>Übung: Simulation des Klanges einer Klarinette</strong> <a href="../loesungen/#Übung: Simulation des Klanges einer Klarinette">Lösung</a></p>
+<p>Die vollständige harmonische Reihe besteht aus den Frequenzen fo, 2fo, 3fo, 4fo, 5fo usw., wobei f0 die Grundfrequenz ist. Die Klarinette spielt (ungefähr) nur die ungeraden Mitglieder der Serie. Simulieren Sie den Klang einer Klarinette mit einem einzigen <code>SinOsc</code> und einem Array für die <code>freq</code>- und <code>mul</code>-Argumente. Verwenden Sie zunehmend kleinere Werte für die Amplitude höherer Teiltöne des Klangs. Tipp: Dies lässt sich sehr einfach mit den Array-Klassenmethoden <code>series</code> und <code>geom</code> implementieren. Da wir im Grunde genommen mehrere Instanzen des <code>SinOsc</code>-UGen erzeugen, indem wir Arrays übergeben, können wir mithilfe der <code>Mix</code>-Klasse dieses End-Array in ein Stereosignal (ein Array mit zwei Elementen) zusammenfassen (<code>Mix</code> erzeugt die Summe aller Signale in seinem Argument; suchen Sie mit <strong>Ctrl+Shift+D</strong> nach der Dokumentationsseite: <code>Mix</code>).</p>
 <p><strong>Übung: Generierung eines Intervals</strong>
-Generieren Sie ein Quint-Intervall mit den beiden Tönen A (440 Hz) und der Quinte darüber. 
+Generieren Sie ein Quint-Intervall mit den beiden Tönen A (440 Hz) und der Quinte darüber.
 Senden Sie an Ihre Funktion statt <code>play</code> die Nachricht <code>value</code>, um die Funktion zu evaluieren, anstatt den Ausgabewert an den Server für Klanggenerierung zu leiten.
 Die Ausgabe ist ein Array von UGens.</p>
 <p>Beachten Sie, dass es in diesem Kontext ausreicht, wenn eines der Argumente anstelle einer Zahl ein Array ist, um eine entsprechende Array von Ausgängen zurückzubekommen.

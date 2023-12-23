@@ -157,7 +157,7 @@ name
 <p><strong>Achtung</strong></p>
 <p>Wenn es sich bei der Eigenschaft um eine Funktion handelt, ist diese Schreibweise:</p>
 <p><code>Klasse.Funktion</code></p>
-<p>äquivalent zu:  </p>
+<p>äquivalent zu:</p>
 <p><code>Funktion(Klasse)</code></p>
 <p>Mehr zu Funktionen später...</p>
 </blockquote>
@@ -223,6 +223,11 @@ reciprocal(4);
 <p>Ein weiteres Beispiel ist die Funktion <code>linlin</code>, bei der eine Zahl aus einem linearen Zahlenraum auf einen anderen linearen Zahlenraum abgebildet wird. In unserem Beispiel wird die Zahl 0.5 aus dem Bereich von 0 bis 1 auf den Bereich von 10 bis 20 abgebildet, wobei dies der Zahl 15 entspricht.</p>
 <pre><code>0.5.linlin(0, 1, 10, 20)
 </code></pre>
+<blockquote>
+<p><strong>Hinweis</strong>
+Viele Klassen in SuperCollider verfügen über sogenannte Klassenmethoden. Diese Funktionen werden auf die Klasse selbst angewendet und nicht, wie in unseren bisherigen Beispielen, auf eine Instanz der Klasse. Zum Beispiel besitzt die Klasse Array die Klassenmethode <code>geom</code>, mit der eine geometrische Reihe erzeugt werden kann. Der Aufruf einer Klassenmethode erfolgt wie folgt: <code>Array.geom(10, 1, 2)</code>
+Dies erzeugt ein Array mit 10 Elementen, wobei das erste Element 1 ist und jedes weitere Element die Verdopplung des vorherigen Elements darstellt: <code>[ 1, 2, 4, 8, 16, 32, 64, 128, 256, 512 ]</code> (siehe auch: <a href="">https://de.wikipedia.org/wiki/Geometrische_Reihe</a>). Für weitere Beispiele der Klassenmethoden der Array-Klasse werfen Sie einen Blick auf die Dokumentationsseite <em>Array/Class Methods</em>.</p>
+</blockquote>
 <p>Wir können auch unsere eigenen Funktionen definieren. Unten habe ich alle Zeilen innerhalb eines Code-Blocks (runden Klammern) platziert, um sie alle zusammen evaluieren zu können. Ich verwende auch einen globalen Namen (mit einer Tilde), da ich von überall auf meine Funktion zugreifen möchte. Die Funktion erhält zwei Zahlen als Argumente und evaluiert zu ihrer Summe der Quadratzahlen.</p>
 <p>Ich definiere hier meine Funktion und gebe ihr den Namen "quadsum".
 Der Funktionskörper wird zwischen geschweiften Klammern definiert.
@@ -310,11 +315,11 @@ Schreiben Sie eine Funktion <code>~calculateSphereVolume</code>, die den Radius 
 <p><strong>Übung: Tonleiter generieren</strong>
 Definieren Sie zwei globale Variablen <code>~majorPattern</code> und <code>~minorPattern</code>. Definieren Sie eine Funktion <code>~generateScale</code>, die drei Argumente erhält: eine MIDI-Keynummer, ein Skalenmuster und eine Oktavnummer. Die Funktion soll die gewünschte Tonleiter (angegeben als <code>scalePattern</code>, entweder <code>~majorPattern</code> oder <code>~minorPattern</code>) generieren, beginnend bei der MIDI-Keynummer und transponiert um die angegebene Anzahl von Oktaven nach oben oder nach unten.</p>
 <h2 id="iterieren-mit-do-und-collect">Iterieren mit <code>do</code> und <code>collect</code></h2>
-<p>In SuperCollider ist das Iterieren über Listen und Arrays und das Sammeln von Ergebnissen eine wichtige Technik, um komplexe Operationen auf Daten auszuführen. Die Methoden <code>do</code> und <code>collect</code> sind dabei sehr hilfreich. </p>
+<p>In SuperCollider ist das Iterieren über Listen und Arrays und das Sammeln von Ergebnissen eine wichtige Technik, um komplexe Operationen auf Daten auszuführen. Die Methoden <code>do</code> und <code>collect</code> sind dabei sehr hilfreich.</p>
 <h3 id="das-do-muster">Das <code>do</code>-Muster</h3>
 <p>Die Methode <code>do</code> wird verwendet, um über die Elemente einer Liste oder Array zu iterieren und eine Aktion auf jedes Element auszuführen. Zum Beispiel:</p>
 <pre><code class="language-supercollider">// Iteriert über die Array und zeigt jedes Element im Post-Window
-[1, 2, 3, 4, 5].do { 
+[1, 2, 3, 4, 5].do {
     arg element;
     element.postln;
 }
@@ -324,7 +329,7 @@ Definieren Sie zwei globale Variablen <code>~majorPattern</code> und <code>~mino
 <p>Die Methode <code>collect</code> wird verwendet, um eine neue Liste/Array zu erstellen, indem eine Aktion auf jedes Element der ursprünglichen Liste angewendet wird. Zum Beispiel:</p>
 <pre><code class="language-supercollider">// Erstellt eine neue Array/Liste, in der jedes Element um 10 erhöht ist
 var originalList = [1, 2, 3, 4, 5];
-var newList = originalList.collect { 
+var newList = originalList.collect {
    arg element;
    element + 10;
 };
@@ -337,7 +342,7 @@ Schreiben Sie eine Funktion namens <code>~squareNumbers</code>, die eine Liste v
 <p><strong>Übung: Fibonacci-Folge generieren</strong>
 Schreiben Sie eine Funktion <code>~generateFibonacci</code>, die eine positive Ganzzahl n als Argument erhält und die ersten n Zahlen in der Fibonacci-Folge zurückgibt.</p>
 <h2 id="kontrollstrukturen">Kontrollstrukturen</h2>
-<p>Manchmal möchten wir Teile unseres Codes nur ausführen, wenn eine bestimmte Bedingung erfüllt ist. Das erreichen wir mithilfe der sogenannten <a href="https://de.wikipedia.org/wiki/Kontrollstruktur">Kontrollstrukturen</a>. </p>
+<p>Manchmal möchten wir Teile unseres Codes nur ausführen, wenn eine bestimmte Bedingung erfüllt ist. Das erreichen wir mithilfe der sogenannten <a href="https://de.wikipedia.org/wiki/Kontrollstruktur">Kontrollstrukturen</a>.</p>
 <h3 id="if"><code>if</code></h3>
 <p>Eines dieser Mittel ist das <code>if</code>-Statement, das die folgende Form hat:</p>
 <pre><code>(
@@ -345,7 +350,7 @@ if
   (Bedingung ist erfüllt),
   {Dann evaluiere diese Funktion},
   {Ansonsten evaluiere diese Funktion}
-) 
+)
 </code></pre>
 <p>Wir schauen uns ein Beispiel an: Wir testen den Wert einer Zufallszahl und möchten eine Zeile im Post-Fenster ausgeben lassen. Diese Zeile soll die Nachricht "Größer als Zehn" ausgeben, wenn unsere Zahl größer als 10 ist, und "Kleiner als Zehn" ausgeben, wenn die Zahl kleiner als 10 ist.</p>
 <pre><code>(
@@ -361,7 +366,7 @@ if (
 )
 )
 </code></pre>
-<p><strong>Übung:</strong> 
+<p><strong>Übung:</strong>
 Schreiben Sie eine Funktion namens <code>randomColor</code>, die 50% der Zeit den String "Rot" und 50% der Zeit den String "Gelb" ausgibt.</p>
 <p>Tipp: Nutzen Sie die eingebaute Funktion <code>coin</code>. Diese Funktion erhält eine Zahl zwischen 0 und 1 als Argument und gibt mit der angegebenen Wahrscheinlichkeit die booleschen Werte <code>true</code> oder <code>false</code> aus. Zum Beispiel wird <code>1.coin</code> immer <code>true</code> ausgeben, während <code>0.coin</code> immer zu <code>false</code> evaluiert wird.</p>
 <p><strong>Übung: Überprüfung der Geradheit einer Zahl</strong>
@@ -415,7 +420,7 @@ case
 <pre><code>(
 // Testen, ob eine Zufallszahl zwischen 10 und 100 durch 7, 5 oder 3 teilbar ist
 var n = rrand(10, 100);
-case 
+case
     { n.mod(7) == 0 } { &quot;% ist durch 7 teilbar&quot;.postf(n) }
     { n.mod(5) == 0 } { &quot;% ist durch 5 teilbar&quot;.postf(n) }
     { n.mod(3) == 0 } { &quot;% ist durch 3 teilbar&quot;.postf(n) }
