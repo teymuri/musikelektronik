@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="https://teymuri.github.io/musikelektronik/lit/">
+        <link rel="canonical" href="https://teymuri.github.io/musikelektronik/buffs/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Literatur - Seminar/Übung Musikelektronik</title>
+        <title>Puffer - Seminar/Übung Musikelektronik</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -34,7 +34,7 @@
                             <li class="navitem">
                                 <a href=".." class="nav-link">Modulbeschreibung</a>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Kapitel <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
@@ -59,7 +59,7 @@
 </li>
             
 <li>
-    <a href="../buffs/" class="dropdown-item">Puffer</a>
+    <a href="./" class="dropdown-item active">Puffer</a>
 </li>
             
 <li>
@@ -84,8 +84,8 @@
   </li>
                                 </ul>
                             </li>
-                            <li class="navitem active">
-                                <a href="./" class="nav-link">Literatur</a>
+                            <li class="navitem">
+                                <a href="../lit/" class="nav-link">Literatur</a>
                             </li>
                             <li class="navitem">
                                 <a href="../kontakt/" class="nav-link">Kontakt</a>
@@ -99,12 +99,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../loesungen/" class="nav-link">
+                                <a rel="prev" href="../envs/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../kontakt/" class="nav-link">
+                                <a rel="next" href="../seq/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -126,13 +126,9 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#literatur" class="nav-link">Literatur</a>
+            <li class="nav-item" data-level="1"><a href="#buffers" class="nav-link">Buffers</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#artikel" class="nav-link">Artikel</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#bucher" class="nav-link">Bücher</a>
+            <li class="nav-item" data-level="2"><a href="#abspielen-des-buffers" class="nav-link">Abspielen des Buffers</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -143,17 +139,123 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="literatur">Literatur</h1>
-<p>Auf dieser Seite wird auf einige lesenswerte Artikel und Bücher mit Themenschwerpunkten im Bereich der elektronischen und algorithmischen Musik verwiesen.</p>
-<h2 id="artikel">Artikel</h2>
-<ul>
-<li><a href="../pdf/meyer-eppler_elektronische-kompositionstechnik.pdf">W. Meyer-Eppler: Elektronische Kompositionstechnik (1953)</a></li>
-<li><a href="../pdf/eimert_sinus-ton.pdf">H. Eimert, Der Sinus-Ton (1954)</a></li>
-</ul>
-<h2 id="bucher">Bücher</h2>
-<ul>
-<li><a href="https://link.springer.com/book/10.1007/978-3-211-75540-2">G. Nierhaus:  Algorithmic Composition, Paradigms of Automated Music Generation</a></li>
-</ul></div>
+<h1 id="buffers">Buffers</h1>
+<p>Buffers (auf Deutsch: Puffer) sind Speicherbereiche im Arbeitsspeicher unseres Rechners, auf die wir eine Sequenz von Zahlen schreiben können. Diese Zahlen repräsentieren oft einzelne Samples einer Audio-Datei.
+Wir können mit der <code>read</code>-Methode (als Klassenmethode) auf dem Server einen Buffer reservieren und eine Audiodatei darauf schreiben:</p>
+<pre><code>b = Buffer.read(s, &quot;/pfad/zur/audio-datei/glass-bowl.wav&quot;)
+</code></pre>
+<p>Mit der <code>query</code>-Methode können wir einige schnelle Informationen von unserem neu zugewiesenen Buffer abrufen, und mit der <code>play</code>-Methode können wir den Inhalt des Buffers abspielen:</p>
+<pre><code>b.query
+
+/*
+bufnum: 8
+numFrames: 118769
+numChannels: 2
+sampleRate: 44100.0
+*/
+
+b.play
+</code></pre>
+<p><strong>Anmerkung</strong> Unter der Haube ruft die <code>read</code>-Methode die Klassenmethode <code>alloc</code> der Buffer-Klasse auf, die einen Puffer im Speicherplatz zuweist und die neu erstellte Pufferinstanz zurückgibt. Das ist der Grund, warum wir diese Instanz der Variable <code>b</code> zuweisen, damit wir weiter mit unserem Pufferobjekt arbeiten können.</p>
+<h2 id="abspielen-des-buffers">Abspielen des Buffers</h2>
+<p>Das Abspielen eines Buffers kann mithilfe des UGens <code>PlayBuf</code> erfolgen. Hier ist ein Beispiel, wie ein Puffer (<code>b</code>) mit <code>PlayBuf</code> abgespielt wird, zusammen mit der Erklärung der Argumente von <code>PlayBuf</code>:</p>
+<pre><code>// Beispiel PlayBuf
+b = Buffer.read(s, &quot;/home/okavango/Desktop/glass-bowl.wav&quot;);
+(
+// Das Argument `numChannels` bezieht sich auf die
+// Anzahl der Kanäle der Audio-Datei im Buffer.
+// Es ist sicherer, dieses Argument mit `b.numChannels`
+// zu belegen, damit automatisch die richtige Anzahl an
+// Kanälen übermittelt wird.
+var numChannels = b.numChannels;
+/*
+Das Argument `rate` stellt die Abspielgeschwindigkeit des Buffers dar,
+wobei 1 der Originalgeschwindigkeit entspricht. Bei 2 wird der Buffer doppelt
+so schnell abgespielt (eine Oktave höher), und bei 0.5 wird er halb so schnell
+abgespielt (eine Oktave tiefer). Negative Zahlen bewirken, dass der Buffer
+rückwärts abgespielt wird.
+*/
+var rate = 1;
+/*
+Das `doneAction`-Argument bewirkt, ähnlich wie bei den oben erklärten Hüllkurven,
+dass das `PlayBuf`-UGen aus dem Arbeitsspeicher entfernt wird, sobald die Audiodatei 
+bis zum Ende abgespielt ist.
+*/
+var action = 2;
+{PlayBuf.ar(numChannels: numChannels, bufnum: b, rate: rate, doneAction: action)}.play;
+)
+</code></pre>
+<p>Es kann passieren, dass die Audiodatei, die wir in den Puffer schreiben, mit einer anderen Abtastrate aufgenommen wurde, und der Supercollider-Server mit einer unterschiedlichen Abtastrate läuft. Wenn dies der Fall ist, wird es zu Unstimmigkeiten bezüglich der Endabspiel-Frequenz kommen. </p>
+<p>Beispiel: Wenn wir eine Audiodatei mit einer Abtastrate von 44100 Hz auf einen Puffer laden und unser Server mit einer Taktfrequenz von 48000 Hz läuft, wird das Audio um einen Faktor von 48000 / 44100 = 1.0884353741497 höher klingen als die originale Audio-Datei. Um dies zu kompensieren (sprich einen Abspielfaktor von 1 zu erreichen), müssen wir die Abspielrate mit dem Kehrwert dieses Faktors multiplizieren. Die Abtastraten der jeweiligen Server und des Buffers können wir folgendermaßen herausfinden: Mit den UGens <code>BufSampleRate.ir(b)</code> können wir die Abtastrate des Buffers <code>b</code> abrufen, und das UGen <code>SampleRate.ir</code> für die Abtastrate des Servers verwenden. Alternativ können wir die Variablen <code>b.sampleRate</code> (für den Buffer <code>b</code>) und <code>s.sampleRate</code> (für den lokalen Server <code>s</code>) verwenden.</p>
+<p>Also kann das obige Beispiel folgendermaßen verbessert werden, um etwaige Abtastdifferenzen beim Abspielen auszugleichen:</p>
+<pre><code>(
+var numChannels = b.numChannels;
+var rate = 1;
+var action = 2;
+{
+    PlayBuf.ar(
+        numChannels: numChannels,
+        bufnum: b,
+        rate: BufSampleRate.ir(b) / SampleRate.ir * rate,
+        doneAction: action)
+}.play;
+)
+</code></pre>
+<p>Es ist ebenso möglich, das UGen <code>BufRateScale</code> zu verwenden, das den erforderlichen Ausgleichsfaktor für uns berechnet.
+Dadurch ersparen wir uns den Schritt der Division:</p>
+<pre><code>(
+var numChannels = b.numChannels;
+var rate = 1;
+var action = 2;
+{
+    PlayBuf.ar(
+        numChannels: numChannels,
+        bufnum: b,
+        rate: BufRateScale.ir(b) * rate,
+        doneAction: action)
+}.play;
+)
+</code></pre>
+<p>Drei weitere Argumente von <code>PlayBuf</code> sind <code>trigger</code>, <code>loop</code> und <code>startPos</code>.</p>
+<p>Ein Trigger findet statt, wenn ein Signal einen Übergang von einem negativen zu einem positiven (oder 0) Wert durchläuft. Beispielsweise erfolgt der Trigger, wenn der Signalwert von -0.1234 auf 0.1234 oder ähnlich wechselt. Viele UGens erzeugen Werte, die sich im negativen und positiven Bereich bewegen. Ein Beispiel dafür ist der <code>Impulse</code> UGen, der in einer bestimmten Frequenz den Wert 1 ausgibt und sonst 0. </p>
+<p>Führen Sie die folgende Zeile aus und beobachten Sie das Post-Fenster:</p>
+<pre><code>{Impulse.kr(1).poll(trig: 2)}.play
+</code></pre>
+<p>Wir übergeben unserem <code>PlayBuf</code> ein <code>Impulse</code>-UGen als Argument für den Trigger:</p>
+<pre><code>(
+var numChannels = b.numChannels;
+var rate = 1;
+var action = 2;
+{
+    PlayBuf.ar(
+        numChannels: numChannels,
+        trigger: Impulse.kr(1).poll(trig: 2),
+        bufnum: b,
+        rate: BufRateScale.ir(b) * rate,
+        doneAction: action
+    )
+}.play;
+)
+</code></pre>
+<p><strong>Übung</strong> Ändern Sie die Frequenz des Triggers, indem Sie die UGens <code>MouseX</code> als Argument für den <code>Impulse</code>-Generator verwenden, um Werte zwischen den Frequenzen 0.1 und 10 zu erhalten. Wenn das <code>PlayBuf</code> beendet wird, kommentieren Sie das <code>doneAction</code>-Argument aus und versuchen Sie es erneut. Versuchen Sie den Zusammenhang zu erklären.</p>
+<p>Das Argument <code>startPos</code> bestimmt die Samplenummer, ab der das Abspielen beginnen soll. Mit dem UGen <code>BufFrames</code> erhalten wir die Anzahl der Samples im Buffer. Mögliche Werte für <code>startPos</code> können zwischen 0 und <code>BufFrames</code> liegen:</p>
+<pre><code>(
+var numChannels = b.numChannels;
+var rate = 1;
+var action = 2;
+{
+    PlayBuf.ar(
+        numChannels: numChannels,
+        trigger: Impulse.kr(1),
+        // Bewegen Sie die Maus nach oben und unten
+        startPos: MouseY.kr(BufFrames.ir(b), 0),
+        bufnum: b,
+        rate: BufRateScale.ir(b) * rate
+    )
+}.play;
+)
+</code></pre>
+<p>Und das boolesche Argument <code>loop</code> (selten verwendet) setzt das Abspielen in einer Schleife fort: Sobald die Datei bis zum letzten Sample abgespielt wurde, beginnt das Abspielverfahren wieder beim ersten Sample und so weiter.</p></div>
             </div>
         </div>
 

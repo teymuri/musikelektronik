@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="https://teymuri.github.io/musikelektronik/lit/">
+        <link rel="canonical" href="https://teymuri.github.io/musikelektronik/seq/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Literatur - Seminar/Übung Musikelektronik</title>
+        <title>Sequenzierung - Seminar/Übung Musikelektronik</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -34,7 +34,7 @@
                             <li class="navitem">
                                 <a href=".." class="nav-link">Modulbeschreibung</a>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Kapitel <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
@@ -63,7 +63,7 @@
 </li>
             
 <li>
-    <a href="../seq/" class="dropdown-item">Sequenzierung</a>
+    <a href="./" class="dropdown-item active">Sequenzierung</a>
 </li>
     </ul>
   </li>
@@ -84,8 +84,8 @@
   </li>
                                 </ul>
                             </li>
-                            <li class="navitem active">
-                                <a href="./" class="nav-link">Literatur</a>
+                            <li class="navitem">
+                                <a href="../lit/" class="nav-link">Literatur</a>
                             </li>
                             <li class="navitem">
                                 <a href="../kontakt/" class="nav-link">Kontakt</a>
@@ -99,12 +99,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../loesungen/" class="nav-link">
+                                <a rel="prev" href="../buffs/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../kontakt/" class="nav-link">
+                                <a rel="next" href="../loesungen/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -126,13 +126,9 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#literatur" class="nav-link">Literatur</a>
+            <li class="nav-item" data-level="1"><a href="#sequenzierung" class="nav-link">Sequenzierung</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#artikel" class="nav-link">Artikel</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#bucher" class="nav-link">Bücher</a>
+            <li class="nav-item" data-level="2"><a href="#routine" class="nav-link">Routine</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -143,17 +139,131 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="literatur">Literatur</h1>
-<p>Auf dieser Seite wird auf einige lesenswerte Artikel und Bücher mit Themenschwerpunkten im Bereich der elektronischen und algorithmischen Musik verwiesen.</p>
-<h2 id="artikel">Artikel</h2>
-<ul>
-<li><a href="../pdf/meyer-eppler_elektronische-kompositionstechnik.pdf">W. Meyer-Eppler: Elektronische Kompositionstechnik (1953)</a></li>
-<li><a href="../pdf/eimert_sinus-ton.pdf">H. Eimert, Der Sinus-Ton (1954)</a></li>
-</ul>
-<h2 id="bucher">Bücher</h2>
-<ul>
-<li><a href="https://link.springer.com/book/10.1007/978-3-211-75540-2">G. Nierhaus:  Algorithmic Composition, Paradigms of Automated Music Generation</a></li>
-</ul></div>
+<h1 id="sequenzierung">Sequenzierung</h1>
+<h2 id="routine">Routine</h2>
+<p>Das Abspielen mehrerer Synth-Instanzen mit einfachen Iterationsmöglichkeiten wie <code>do</code> und <code>collect</code> führt zwangsläufig zu Akkorden, da wir mit <code>do</code>/<code>collect</code>-Konstruktionen keine Möglichkeit zum sequenziellen Abspielen der Synth-Instanzen haben (diese werden praktisch gleichzeitig ausgeführt). Mit der Klasse <code>Routine</code> können wir dies erreichen: Eine Routine ist im Grunde genommen eine Funktion, deren Ausführung wir mitten in der Aufführung für eine beliebige Zeit pausieren können.</p>
+<p>Um eine Routine zu schreiben, müssen wir lediglich den Iterationscode innerhalb der Routine einsetzen und an der passenden Stelle bestimmen, wie lange unsere Routine nach jeder Iteration warten soll, bevor die nächste Iteration einsetzt. Dies geschieht mit Hilfe der <code>wait</code>-Methode. Am Ende müssen wir unsere fertige Routine mithilfe der <code>play</code>-Methode starten. Eine fertige Routine sieht folgendermaßen aus; hier spielen wir die ersten 20 Partialtöne der Grundfrequenz 110 Hz in einer Sequenz, wobei wir nach jedem Ton 150 Millisekunden warten (<code>0.15.wait</code>):</p>
+<pre><code>(
+Routine {
+    (Array.series(20, 1) * 110).do {
+        arg freq;
+        freq.postln;
+        Synth(\meinSynth, [freq: freq, dur: 0.5]);
+        0.15.wait
+    }
+}.play
+)
+</code></pre>
+<p><strong>Übung</strong> Verändern Sie die Parameter der obigen Routine, wie zum Beispiel das Array von Frequenzen, über das wir iterieren wollen. Passen Sie die Wartezeit der Routine an, sodass diese einen zufälligen Wert zwischen 100 Millisekunden und 500 Millisekunden annimmt (Stichwort <code>rrand</code>).</p>
+<p>In der Tat kann man mit der <code>next</code>-Methode den nächsten Wert einer Routine abrufen. Dies ermöglicht uns, auch unendliche Sequenzen nach bestimmten Mustern zu generieren. Im folgenden Beispiel definieren wir unsere Funktion aus dem Kapitel (?) zur Generierung der Fibonacci-Zahlen. Hierbei gestalten wir die Funktion jedoch so, dass wir mit einer <code>inf.do</code> eine unendliche Iteration starten (<code>inf</code> steht für Infinite und ist ein von SuperCollider definierter Begriff). Die unendliche Iteration wird jedoch hier durch <code>yield</code> unterbrochen. <code>yield</code> funktioniert synonym zu <code>wait</code> und gibt einen Zwischenwert der Funktion zurück:</p>
+<pre><code>(
+// Die Funktion zum Generieren der Fibonacci Sequenz
+~fibGen = {
+    var a=0, b=1;
+    var tmpA = a;
+    inf.do {
+        a.yield;
+        a = b;
+        b = tmpA + b;
+        tmpA = a;
+    }
+}
+);
+
+~fibs = Routine(~fibGen)
+</code></pre>
+<p>Man kann nun mithilfe der <code>next</code>-Methode die einzelnen Werte unserer Routine abfragen:</p>
+<pre><code class="language-supercollider">// Evaluieren Sie die folgende Zeile mehrmals
+~fibs.next;
+/*
+-&gt; 0
+-&gt; 1
+-&gt; 1
+-&gt; 2
+-&gt; 3
+-&gt; 5
+-&gt; 8
+-&gt; 13
+-&gt; 21
+-&gt; 34
+-&gt; 55
+-&gt; 89
+-&gt; 144
+-&gt; 233
+-&gt; 377
+-&gt; 610
+-&gt; 987
+-&gt; 1597
+   usw.
+*/
+</code></pre>
+<p>Eine Routine kann außerdem gestoppt werden, indem man die <code>stop</code>-Methode verwendet:</p>
+<pre><code class="language-supercollider">// Nach der Evaluierung dieser Zeile hat unsere Routine keine Werte mehr zum Zurückgeben
+~fibs.stop
+</code></pre>
+<p>und sie kann durch die <code>reset</code>-Methode zurückgesetzt werden:</p>
+<pre><code class="language-supercollider">// Durch die `reset`-Methode können wir immer wieder zum Anfang zurück springen.
+// Evaluieren Sie die reset- und anschließend die next-Methode
+~fibs.reset
+~fibs.next
+</code></pre>
+<p>Die Klasse <code>Routine</code> erbt die Methode <code>play</code> von der abstrakten Klasse <code>Stream</code> (eine Klasse, die wir nie direkt verwenden werden, sondern nur für die Definition weiterer Klassen vorgesehen ist). Die Methode <code>play</code> funktioniert im Wesentlichen wie das wiederholte Aufrufen der Methode <code>next</code>, bis die Routine erschöpft ist und <code>nil</code> zurückgibt. Zu diesem Zeitpunkt wird das weitere Abrufen von Werten gestoppt. Ähnlich wie im oben genannten Fibonacci-Beispiel können wir den Fortschritt der Werteberechnungen in einer Schleife (wie beispielsweise <code>do</code>) verpacken und dabei entsprechende <code>wait</code>- oder <code>yield</code>-Anweisungen an geeigneten Stellen einfügen:</p>
+<pre><code class="language-supercollider">(
+Routine {
+    5.do {
+        arg i;
+        i.postln;
+        &quot;  +&quot;.postln;
+        1.wait;
+        &quot;  -&quot;.postln;
+        1.wait;
+    };
+    &quot;Ende&quot;.postln
+}.play
+)
+
+/*
+-&gt; a Routine
+0
+  +
+  -
+1
+  +
+  -
+2
+  +
+  -
+3
+  +
+  -
+4
+  +
+  -
+Ende
+*/
+</code></pre>
+<p>oder wir können die Eingabewerte von <code>yield</code> als Wartezeit interpretieren: Wenn die Eingabe für <code>yield</code> eine Zahl ist, wird diese automatisch als Wartezeit interpretiert. Es wird so lange gewartet, bis der nächste Aufruf der <code>next</code>-Methode stattfindet:</p>
+<pre><code class="language-supercollider">(
+Routine {
+    0.25.postln.yield;
+    0.5.postln.yield;
+    1.postln.yield;
+    2.postln.yield;
+    4.postln.yield;
+    &quot;Ende&quot;.postln
+}.play
+)
+
+/*
+-&gt; a Routine
+0.25
+0.5
+1
+2
+4
+Ende
+*/
+</code></pre></div>
             </div>
         </div>
 

@@ -8,7 +8,7 @@
         
         <link rel="canonical" href="https://teymuri.github.io/musikelektronik/loesungen/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Übungslösungen - Seminar/Übung Musikelektronik</title>
+        <title>Instrumente definieren mit SynthDef - Seminar/Übung Musikelektronik</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -34,11 +34,8 @@
                             <li class="navitem">
                                 <a href=".." class="nav-link">Modulbeschreibung</a>
                             </li>
-                            <li class="navitem">
-                                <a href="../kontakt/" class="nav-link">Kontakt</a>
-                            </li>
                             <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Übersicht <b class="caret"></b></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Kapitel <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
   <li class="dropdown-submenu">
@@ -54,7 +51,34 @@
 </li>
             
 <li>
-    <a href="../synthdef/" class="dropdown-item">Instrumente definieren mit SynthDef</a>
+    <a href="../synth/" class="dropdown-item">Instrumente definieren mit SynthDef</a>
+</li>
+            
+<li>
+    <a href="../envs/" class="dropdown-item">Hüllkurven</a>
+</li>
+            
+<li>
+    <a href="../buffs/" class="dropdown-item">Puffer</a>
+</li>
+            
+<li>
+    <a href="../seq/" class="dropdown-item">Sequenzierung</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Lösungen <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Wintersemester</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="./" class="dropdown-item active">Instrumente definieren mit SynthDef</a>
 </li>
     </ul>
   </li>
@@ -62,6 +86,9 @@
                             </li>
                             <li class="navitem">
                                 <a href="../lit/" class="nav-link">Literatur</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../kontakt/" class="nav-link">Kontakt</a>
                             </li>
                         </ul>
 
@@ -71,6 +98,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../seq/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../lit/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -95,6 +132,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-level="2"><a href="#anpassen-der-wartezeit-zufallig-zwischen-100-und-500-millisekunden-in-sekunden-ausgedruckt-01-und-05-sekunden" class="nav-link">Anpassen der Wartezeit zufällig zwischen 100 und 500 Millisekunden (in Sekunden ausgedrückt: 0,1 und 0,5 Sekunden)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -116,6 +157,19 @@
             mul: Array.geom(sz, 0.5, 0.5)
         )
     )
+}.play
+)
+</code></pre>
+<h2 id="anpassen-der-wartezeit-zufallig-zwischen-100-und-500-millisekunden-in-sekunden-ausgedruckt-01-und-05-sekunden">Anpassen der Wartezeit zufällig zwischen 100 und 500 Millisekunden (in Sekunden ausgedrückt: 0,1 und 0,5 Sekunden)</h2>
+<pre><code>(
+Routine {
+    (Array.series(20, 1) * 110).do {
+        arg freq;
+        freq.postln;
+        Synth(\meinSynth, [freq: freq, dur: 0.5]);
+        // Wartezeit nach jedem Ton
+        0.1.rrand(0.5).wait
+    }
 }.play
 )
 </code></pre></div>
