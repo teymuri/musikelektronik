@@ -16,3 +16,18 @@
 }.play
 )
 ```
+
+## Anpassen der Wartezeit zufällig zwischen 100 und 500 Millisekunden (in Sekunden ausgedrückt: 0,1 und 0,5 Sekunden)
+```
+(
+Routine {
+    (Array.series(20, 1) * 110).do {
+        arg freq;
+        freq.postln;
+        Synth(\meinSynth, [freq: freq, dur: 0.5]);
+		// Wartezeit nach jedem Ton
+        0.1.rrand(0.5).wait
+    }
+}.play
+)
+```

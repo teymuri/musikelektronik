@@ -4,10 +4,16 @@ extra_css:
 site_url: https://teymuri.github.io/musikelektronik/
 nav:
   - Modulbeschreibung: index.md
-  - Kontakt: kontakt.md
-  - Übersicht: 
+  - Kapitel: 
     - Wintersemester:
       - Sprache: lang.md
       - Die ersten Töne: first_sounds.md
-      - Instrumente definieren mit SynthDef: synthdef.md
+      - Instrumente definieren mit SynthDef: synth.md
+      - Hüllkurven: envs.md
+      - Puffer: buffs.md
+      - Sequenzierung: seq.md
+  - Lösungen:
+    - Wintersemester:
+      - Instrumente definieren mit SynthDef: loesungen.md
   - Literatur: lit.md
+  - Kontakt: kontakt.md
