@@ -143,4 +143,17 @@ Ende
 */
 ```
 
+## Task
 
+Ein Task ist größtenteils eine ähnliche Konstruktion wie eine Routine.
+
+## Methodenvergleichstabelle
+Die folgende Tabelle fasst einige der wichtigsten (gemeinsamen) Methoden der beiden Klassen zusammen. Für vollständige Informationen
+konsultieren Sie bitte die Dokumentation der jeweiligen Klasse.
+
+| Methodennamen| Routine   | Task |
+|--------------|-----------|------------|
+| `reset`      | Setzt den internen Zustand des Streams auf den Anfang zurück | Gleich wie bei **Routine**
+| `pause`      | *Nicht vorhanden!*  | Unterbricht momentan den Stream-Ablauf. Der nächste `play`-Abruf nimmt den Vorgang dort, wo er abgebrochen wurde, wieder auf
+| `stop`      | Zerstört den Stream-Ablauf  | Gleich wie `pause`
+| `play`      | Evaluiert die Funktion der Klasse (das erste Argument) solange, bis sie ausgelaufen ist (d.h. nichts mehr zurückgeben kann bzw. `nil` zurückgegeben hat)  | Gleich wie bei **Routine**

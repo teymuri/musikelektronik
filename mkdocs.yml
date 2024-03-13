@@ -5,13 +5,16 @@ site_url: https://teymuri.github.io/musikelektronik/
 nav:
   - Modulbeschreibung: index.md
   - Kapitel: 
-    - Wintersemester:
+    - Wintersemester: # Kennenlernen von SC
       - Sprache: lang.md
       - Die ersten Töne: first_sounds.md
       - Instrumente definieren mit SynthDef: synth.md
       - Hüllkurven: envs.md
       - Puffer: buffs.md
       - Sequenzierung: seq.md
+      - Zeitmanagement mit Uhren: clock.md
+    - Sommersemester: # Techniques
+      - Additive Synthese: add-synth.md
   - Lösungen:
     - Wintersemester:
       - Instrumente definieren mit SynthDef: loesungen.md
