@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://teymuri.github.io/musikelektronik/add-synth/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Additive Synthese - Seminar/Übung Musikelektronik</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <link href="../style.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Seminar/Übung Musikelektronik</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Modulbeschreibung</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Kapitel <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Wintersemester</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../lang/" class="dropdown-item">Sprache</a>
+</li>
+            
+<li>
+    <a href="../first_sounds/" class="dropdown-item">Die ersten Töne</a>
+</li>
+            
+<li>
+    <a href="../synth/" class="dropdown-item">Instrumente definieren mit SynthDef</a>
+</li>
+            
+<li>
+    <a href="../envs/" class="dropdown-item">Hüllkurven</a>
+</li>
+            
+<li>
+    <a href="../buffs/" class="dropdown-item">Puffer</a>
+</li>
+            
+<li>
+    <a href="../seq/" class="dropdown-item">Sequenzierung</a>
+</li>
+            
+<li>
+    <a href="../clock/" class="dropdown-item">Zeitmanagement mit Uhren</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Sommersemester</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="./" class="dropdown-item active">Additive Synthese</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Lösungen <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Wintersemester</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../loesungen/" class="dropdown-item">Instrumente definieren mit SynthDef</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="navitem">
+                                <a href="../lit/" class="nav-link">Literatur</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../kontakt/" class="nav-link">Kontakt</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../clock/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../loesungen/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#harmonische-reihe-wellenform" class="nav-link">Harmonische Reihe, Wellenform</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#additive-synthese" class="nav-link">Additive Synthese</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#nicht-harmonische-spektren-inharmonische-spektren" class="nav-link">Nicht harmonische Spektren (inharmonische Spektren)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<!-- *Die Inhalte dieses Kapitels dienen als Begleitskript für die Lehrveranstaltung "Musikelektronik" im Sommersemester und -->
+<!-- basieren grob auf Materialien aus dem Buch "Computer Music with examples in SuperCollider" von "David Michael Cottle" aus -->
+<!-- dem Jahr 2009.* -->
+<h2 id="harmonische-reihe-wellenform">Harmonische Reihe, Wellenform</h2>
+<p>Die harmonische Reihe ist für den Charakter eines Klangs verantwortlich. Die Präsenz und Stärke jeder Oberschwingung bestimmen diesen Charakter. Bei gleicher Kraft und Spannung vibrieren kurze Saiten schneller als lange. Eine Saite, die normalerweise mit 100 Hz vibriert, halbiert sich (zum Beispiel durch Drücken des Fingers auf das Griffbrett an der Hälfte der Länge) und vibriert dann doppelt so schnell, nämlich mit 200 Hz. Wenn Sie sie auf ein Drittel ihrer ursprünglichen Länge verkürzen, indem Sie den Finger höher drücken, wird sie dreimal so schnell vibrieren oder 300 Hz. Eine Verkürzung auf ein Viertel erzeugt eine viermal schnellere Frequenz; 400 Hz. Durch solche Teilungen einer Saite entstehen Obertöne. Obertöne bilden die Grundlage für die Tonstufen der westlichen Musik. Die folgende Abbildung zeigt die Tonhöhen, die jeder oberen Oberschwingung entsprechen. Das tiefste C liegt bei etwa 65 Hz, dann folgt 130, dann 195, 260 (mittleres C), 325, 390, 455, 520, 585, 650, 715, 780, 845, 910, 975, 1040:</p>
+<p><img alt="Obertöne des C 65Hz" src="../pix/overtones-c65.jpg" /></p>
+<p>Die meisten Saiten (und Klangkörper von Musikinstrumenten) schwingen gleichzeitig bei all diesen Frequenzen. Während eine Saite bei ihrer vollen Länge schwingt, schwingt sie auch in Hälften (siehe die Abbildung unten - beachten Sie, dass all diese Bewegungen gleichzeitig stattfinden):</p>
+<p><img alt="Seiten Schwingungen" src="../pix/vibrating-strings.jpg" /></p>
+<p>Diese halbe Schwingungsbewegung ist doppelt so schnell. Sie schwingt auch in Dritteln, Vierteln, Fünfteln usw. Eine einzelne Saite, die bei 65 Hz schwingt, erzeugt also auch die Frequenzen 130, 195 usw.</p>
+<p>Die Klangfarbe besteht nicht nur aus der Präsenz, sondern auch aus der Amplitude dieser Obertöne. Jeder der Obertöne kann in einer Computerumgebung durch eine Sinuswelle repräsentiert werden. Als Faustregel haben die höheren Obertöne eine geringere Amplitude, jedoch variiert die tatsächliche Amplitude jedes Obertons je nach Klangfarbe. Die Präsenz und Amplitude der oberen Obertöne bilden den klanglichen Fingerabdruck eines jeden Klangs. Eine Violine kann beispielsweise einen stärkeren dritten Oberton, einen schwächeren vierten, keinen fünften und einen schwachen sechsten haben, während eine Posaune einen schwachen dritten, einen starken vierten und so weiter haben wird.</p>
+<p>Unten sind Sonogramme verschiedener Musikinstrumente zu sehen, die jeweils zwei Noten spielen (Wiederholung derselben Note). Beachten Sie die unterschiedlichen Ansammlungen von Obertönen.
+<img alt="Sonogram Instrumente" src="../pix/sonogram-harmonics.jpg" /></p>
+<h2 id="additive-synthese">Additive Synthese</h2>
+<p>Als eine Aufgabe zur Additiven Synthese möchten wir eine Sägezahnwelle erstellen. Unten sehen Sie ein Sonogramm einer Sägezahnwelle und ihren Obertönen:
+<img alt="Sonogram Sawtooth" src="../pix/sonogram-sawtooth.jpg" />
+Um diesen Sägezahn zu rekonstruieren, benötigen wir einzelne Sinuswellen, die harmonisch sind oder Vielfache der Grundfrequenz. Hier ist eine erste grobe Version, aufgebaut auf einer Grundfrequenz von 200. Das Hinzufügen von 12 Sinuswellen würde normalerweise zu Verzerrungen führen, daher werden sie alle um 0,1 skaliert.</p>
+<pre><code>(
+{
+    (
+        SinOsc.ar(200) + SinOsc.ar(400) + SinOsc.ar(600) +
+        SinOsc.ar(800) + SinOsc.ar(1000) + SinOsc.ar(1200) +
+        SinOsc.ar(1400) + SinOsc.ar(1600) + SinOsc.ar(1800) +
+        SinOsc.ar(2000) + SinOsc.ar(2200) + SinOsc.ar(2400)
+    ) * 0.1
+}.scope
+)
+</code></pre>
+<p>Und hier unternehmen wir noch eine Modifikation: Wir justieren die Amplituden der einzelnen Wellenschichten (Obertöne) individuell und proportional zu den Obertonnummern. Das bedeutet, der zweite Oberton ist halb so stark wie die Grundfrequenz, der dritte ein Drittel so stark usw.</p>
+<pre><code>(
+{
+    (
+        SinOsc.ar(200: mul: 1) + SinOsc.ar(400, mul: 1/2) +
+        SinOsc.ar(600, mul: 1/3) +
+        SinOsc.ar(800, mul: 1/4) + SinOsc.ar(1000, mul: 1/5) +
+        SinOsc.ar(1200, mul: 1/6) +
+        SinOsc.ar(1400, mul: 1/7) + SinOsc.ar(1600, mul: 1/8) +
+        SinOsc.ar(1800, mul: 1/9) +
+        SinOsc.ar(2000, mul: 1/10) + SinOsc.ar(2200, mul: 1/11) +
+        SinOsc.ar(2400, mul: 1/12)
+    ) * 0.1
+}.scope
+)
+</code></pre>
+<p>In der nächsten Version überlassen wir die Berechnung der Obertöne dem Computer: Dafür nutzen wir eine Variable für die Grundfrequenz und multiplizieren diese einfach mit den Obertonnummern. Wir packen die Obertöne außerdem in ein Array, um sie zwischen den ersten 12 Ausgangsbussen zu verteilen. Auch wenn wir wahrscheinlich keine 12 Ausgänge an unserem Rechner angeschlossen haben, können wir diese im Stethoskop gut betrachten.</p>
+<pre><code>(
+{
+    var f = 200; // Die Grundfrequenz
+    [
+        SinOsc.ar(f*1: mul: 1) + SinOsc.ar(f*2, mul: 1/2) +
+        SinOsc.ar(f*3, mul: 1/3) +
+        SinOsc.ar(f*4, mul: 1/4) + SinOsc.ar(f*5, mul: 1/5) +
+        SinOsc.ar(f*6, mul: 1/6) +
+        SinOsc.ar(f*7, mul: 1/7) + SinOsc.ar(f*8, mul: 1/8) +
+        SinOsc.ar(f*9, mul: 1/9) +
+        SinOsc.ar(f*10, mul: 1/10) + SinOsc.ar(f*11, mul: 1/11) +
+        SinOsc.ar(f*12, mul: 1/12)
+    ]
+}.scope(numChannels: 12)
+)
+</code></pre>
+<p>???</p>
+<pre><code>(
+{
+    var speed = 14; // Amplitudenveränderungsgeschwindigkeit
+    var f = 200; // Die Grundfrequenz
+    Mix.ar([
+        SinOsc.ar(f*1: mul: LFNoise1.kr(rrand(speed, spped*2), 0.5, 0.5)/1),
+        SinOsc.ar(f*2: mul: LFNoise1.kr(rrand(speed, spped*2), 0.5, 0.5)/2),
+        SinOsc.ar(f*3: mul: LFNoise1.kr(rrand(speed, spped*2), 0.5, 0.5)/3),
+        SinOsc.ar(f*4: mul: LFNoise1.kr(rrand(speed, spped*2), 0.5, 0.5)/4),
+        SinOsc.ar(f*5: mul: LFNoise1.kr(rrand(speed, spped*2), 0.5, 0.5)/5),
+        SinOsc.ar(f*6: mul: LFNoise1.kr(rrand(speed, spped*2), 0.5, 0.5)/6),
+        SinOsc.ar(f*7: mul: LFNoise1.kr(rrand(speed, spped*2), 0.5, 0.5)/7),
+        SinOsc.ar(f*8: mul: LFNoise1.kr(rrand(speed, spped*2), 0.5, 0.5)/8),
+        SinOsc.ar(f*9: mul: LFNoise1.kr(rrand(speed, spped*2), 0.5, 0.5)/9),
+        SinOsc.ar(f*10: mul: LFNoise1.kr(rrand(speed, spped*2), 0.5, 0.5)/10),
+        SinOsc.ar(f*11: mul: LFNoise1.kr(rrand(speed, spped*2), 0.5, 0.5)/11),
+        SinOsc.ar(f*12: mul: LFNoise1.kr(rrand(speed, spped*2), 0.5, 0.5)/12),
+    ]) * 0.5
+}.scope(numChannels: 1)
+)
+</code></pre>
+<p><strong>Übung</strong> Versuchen Sie, im obigen Beispiel die Geschwindigkeit der Amplitudenänderung <code>speed</code> zu variieren. Beobachten Sie, wie sich entsprechend die Klangfarbe verhält. Ersetzen Sie außerdem die Grundfrequenz durch einen anderen <em>Controller</em>, wie zum Beispiel SinOsc, die Maus oder ein LFNoise, und beobachten Sie die Veränderungen im Klang.</p>
+<p>Next we are going to add an envelope. We could replace the last *0.5 with a single envelope to control the amplitude of all the oscillators at once. And that's how most synthesizers with limited modules do it. But since we are working with code we can assign an envelope to each oscillator, making each harmonic independent, resulting in a more natural sound.</p>
+<pre><code>(
+{
+    var g = Impulse.kr(1/3); // Hüllkurvenschranke (gate)
+    var f = 200; // Die Grundfrequenz
+    Mix.ar([
+        SinOsc.ar(f*1: mul: EnvGen.kr(Env.perc(releaseTime: 1.4), g)/1),
+        SinOsc.ar(f*2: mul: EnvGen.kr(Env.perc(releaseTime: 1.1), g)/2),
+        SinOsc.ar(f*3: mul: EnvGen.kr(Env.perc(releaseTime: 2), g)/3),
+        SinOsc.ar(f*4: mul: EnvGen.kr(Env.perc(releaseTime: 1), g)/4),
+        SinOsc.ar(f*5: mul: EnvGen.kr(Env.perc(releaseTime: 1.8), g)/5),
+        SinOsc.ar(f*6: mul: EnvGen.kr(Env.perc(releaseTime: 2.9), g)/6),
+        SinOsc.ar(f*7: mul: EnvGen.kr(Env.perc(releaseTime: 4), g)/7),
+        SinOsc.ar(f*8: mul: EnvGen.kr(Env.perc(releaseTime: 0.3), g)/8),
+        SinOsc.ar(f*9: mul: EnvGen.kr(Env.perc(releaseTime: 1), g)/9),
+        SinOsc.ar(f*10: mul: EnvGen.kr(Env.perc(releaseTime: 3.6), g)/10),
+        SinOsc.ar(f*11: mul: EnvGen.kr(Env.perc(releaseTime: 2.3), g)/11),
+        SinOsc.ar(f*12: mul: EnvGen.kr(Env.perc(releaseTime: 1.1), g)/12),
+    ]) * 0.5
+}.scope(numChannels: 1)
+)
+</code></pre>
+<p>Unten sind ein paar Hinweise, wie wir den oben stehenden (langatmigen) Code etwas kompakter ausdrücken könnten. Wenn Sie sich an die Multi-Array-Expansion vom Wintersemester erinnern, wissen Sie bereits, dass ein UGen mit einem Array-Argument zu einem Array mit Kopien des UGens und entsprechenden Parametern für jedes UGen expandiert wird. Das Mix-UGen hingegen kombiniert alle UGens in seinem Array-Argument zusammen, sodass wir am Ende aus einem Array von UGens ein einziges Signal (die Summe der UGens) erhalten. Mit diesem Wissen kann man erkennen, dass folgende Zeile:</p>
+<pre><code>Mix.ar([SinOsc.ar(200), SinOsc.ar(400), SinOsc.ar(600)])
+</code></pre>
+<p>auch so geschrieben werden kann:</p>
+<pre><code>Mix.ar(SinOsc.ar([200, 400, 600]))
+</code></pre>
+<p>Hier sind zur Wiederholung ein paar weitere Techniken, wie wir bequem Arrays erstellen können:</p>
+<pre><code></code></pre>
+<p>Und dementsprechend können wir das Additive-Synthese-Beispiel oben wie folgt ausdrücken:</p>
+<pre><code>(
+{
+    f = 100;
+    t = Impulse.kr(1/3);
+    Mix.ar(
+        SinOsc.ar(
+            f*(1..12),
+            mul: EnvGen.kr(
+                Env.perc(0, 1),
+                t,
+                levelScale: 1/(1..12),
+                // könnte auch geschrieben werden als: rrand(1.0, 3.0).dup(12)
+                timeScale: [1.4, 1.1, 2, 1, 1.8, 2.9, 4, 0.3, 1, 3.6, 2.3, 1.1]
+            )
+        )
+    ) * 0.5
+}.scope(1)
+)
+</code></pre>
+<p>Zum Abschluss und zur Unterhaltung erstellen wir zwei Varianten, bei denen wir die einzelnen Wellen zufällig zwischen dem linken und rechten Kanal (oder auch irgendwo dazwischen) verteilen. Dies geschieht mit dem <code>Pan2</code> UGen. Führen Sie die folgenden Blocks mehrmals aus, um den Unterschied zu hören:</p>
+<pre><code>(
+var knums = [ 55, 56, 59, 60, 62, 63, 65, 67, 68, 71, 72 ];
+{
+    Mix.ar(
+        Pan2.ar(
+            SinOsc.ar(
+                freq: knums.midicps,
+                mul: LFNoise1.kr(rrand(0.1, 0.5).dup(8), 0.5, 0.5)
+            ),
+            {1.0.rand2}.dup(knums.size)
+        )
+    ) * 0.2
+}.play
+)
+
+(
+var harmonics = 16, fund = TChoose.kr(Dust.kr(0.5), Array.series(6, 30, 7));
+{
+    Mix.fill(
+        harmonics,
+        {
+            arg count;
+            Pan2.ar(
+                FSinOsc.ar(
+                    fund * (count + 1),
+                    mul: FSinOsc.kr(rrand(1/3, 1/6), mul: 0.5, add: 0.5 )
+                ),
+                1.0.rand2)
+        }
+    ) / (2 * harmonics)
+}.play;
+)
+</code></pre>
+<h2 id="nicht-harmonische-spektren-inharmonische-spektren">Nicht harmonische Spektren (inharmonische Spektren)</h2>
+<p>In den obigen Beispielen ist jede der Sinusschwingungen ein Vielfaches des Grundtons (f, 2f, 3f, 4f usw.). Dies ergibt ein harmonisches Spektrum. Die meisten gestimmten Instrumente haben harmonische Spektren. Andere Instrumente hingegen wie Gongs, Glocken und Becken tendieren zu inharmonischen Spektren, d.h. zu einer Reihe von Frequenzen, die keine Vielfachen des Grundtons sind. Um ein inharmonisches Spektrum zu erzeugen, müssen für jede Sinusschwingung nicht zusammenhängende Werte eingegeben werden, z. B. 135, 173, 239, 267, 306, 355, 473, 512, 572 und 626. In den obigen Beispielen wurde die Amplitude jedes oberen Obertons in Bezug auf seine Position berechnet; höhere Obertöne waren leiser. Bei inharmonischen Spektren haben die Amplituden jedoch kein Muster. Zum Beispiel 0,25, 0,11, 0,12, 0,04, 0,1, 0,15, 0,05, 0,01, 0,03, 0,02 und 0,12. Hier ist ein Patch, der die Frequenzen und Amplituden aus meinem zufälligen Prozess zusammenaddiert. Es gibt eine Hüllkurve, daher erhalten Sie das Gefühl einer Glocke, und es hat eine sehr metallische Resonanz:</p>
+<pre><code>(
+{
+    Mix.ar(
+        Pan2.ar(
+            SinOsc.ar(
+                freq: Array.exprand(16, 40, 4000),
+                mul: Array.rand(16, 0.1, 1),
+            ) *
+            EnvGen.kr(Env.perc(releaseTime: 4), levelScale: 0.15, doneAction: 2),
+            1.0.rand2
+        )
+    )
+}.play
+)
+</code></pre>
+<p><strong>Übung</strong> Definieren Sie einen Synthesizer, der den oben beschriebenen Klang der Additivsynthese hat. Verwenden Sie dann den Synthesizer, um verschiedene Dur-/Mollakkorde zu spielen.
+(Tipp: die Funktion <code>midicps</code> wandelt eine MIDI-Nummer in die entsprechende Frequenz um.)</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

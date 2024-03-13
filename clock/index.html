@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="https://teymuri.github.io/musikelektronik/kontakt/">
+        <link rel="canonical" href="https://teymuri.github.io/musikelektronik/clock/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Kontakt - Seminar/Übung Musikelektronik</title>
+        <title>Zeitmanagement mit Uhren - Seminar/Übung Musikelektronik</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -34,7 +34,7 @@
                             <li class="navitem">
                                 <a href=".." class="nav-link">Modulbeschreibung</a>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Kapitel <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
@@ -67,7 +67,7 @@
 </li>
             
 <li>
-    <a href="../clock/" class="dropdown-item">Zeitmanagement mit Uhren</a>
+    <a href="./" class="dropdown-item active">Zeitmanagement mit Uhren</a>
 </li>
     </ul>
   </li>
@@ -101,8 +101,8 @@
                             <li class="navitem">
                                 <a href="../lit/" class="nav-link">Literatur</a>
                             </li>
-                            <li class="navitem active">
-                                <a href="./" class="nav-link">Kontakt</a>
+                            <li class="navitem">
+                                <a href="../kontakt/" class="nav-link">Kontakt</a>
                             </li>
                         </ul>
 
@@ -113,12 +113,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../lit/" class="nav-link">
+                                <a rel="prev" href="../seq/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
+                                <a rel="next" href="../add-synth/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -140,8 +140,12 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#kontakt" class="nav-link">Kontakt</a>
+            <li class="nav-item" data-level="1"><a href="#zeitmanagement-mit-uhren-clocks" class="nav-link">Zeitmanagement mit Uhren (Clocks)</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#tempoclock" class="nav-link">TempoClock</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -149,8 +153,41 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="kontakt">Kontakt</h1>
-<p>Amir.Teymuri[at]hmtm.de</p></div>
+<h1 id="zeitmanagement-mit-uhren-clocks">Zeitmanagement mit Uhren (Clocks)</h1>
+<p>Clocks in SuperCollider sind Objekte, die zur Zeitplanung von Ereignissen eingesetzt werden. Ein Ereignis kann dabei jedes beliebige Objekt sein. Unterschiedliche Objekte führen dabei unterschiedliche Aktionen aus, je nach Implementierung ihrer internen <code>awake</code>-Methode, die von einem Clock zu einer bestimmten Zeit aufgerufen wird. Zum Beispiel führt dies bei einem Funktionsobjekt zu einem Aufruf seiner <code>value</code>-Methode, was die Ausführung der Funktion auslöst.</p>
+<p>Es gibt verschiedene Arten von Clock-Objekten. Unten diskutieren wir das <code>TempoClock</code>, das Ereignisse in einem bestimmten Tempo plant.</p>
+<h2 id="tempoclock">TempoClock</h2>
+<p>Wir erstellen einen Tempo-Clock und betrachten einige seiner Eigenschaften. Das wichtigste Argument dabei ist das Tempo, mit dem wir den Tempo-Clock laufen lassen möchten. Dieses Tempo wird in Beats pro Sekunde (nicht pro Minute) angegeben:</p>
+<pre><code>t = TempoClock.new(2) // 2 entspricht einem Tempo von 120 BPM (Beats pro Minute)
+</code></pre>
+<p>Im obigen Clock tickt die Uhr doppelt so schnell wie im normalen Standard-Clock von SuperCollider, der einmal pro Sekunde tickt. Wir können die BPS (Beats pro Sekunde) bei einem Tempo-Clock abfragen:</p>
+<pre><code>t.tempo; // =&gt; 2.0
+// Und hier ist das Tempo beim Standard-Tempo-Clock:
+TempoClock.default.tempo; // =&gt; 1.0
+</code></pre>
+<p>Um dies zu sehen, können wir die folgende Routine sowohl auf dem Standard-Clock als auch auf unserem eigenen Clock ausführen. Beachten Sie, dass wir die Wartezeit der Endlosschleife in der Funktion der Routine auf 1 gesetzt haben (die Zeiteinheit). Diese Einheit entspricht bei unserem Tempo-Clock einer Zeitmaße von 0.5 Sekunden. Achten Sie dabei auf das Post-Fenster:</p>
+<pre><code>(
+r = Routine {
+    inf.do {
+        arg i;
+        i.postln;
+        1.wait
+    }
+}
+)
+
+// Wir lassen die Routine zuerst auf dem Standard-Tempo-Clock laufen:
+r.play // Das entspricht dem folgenden Ausdruck: `r.play(clock: TempoClock.default)`
+
+// Und einmal auf unserem eigenen Clock:
+r.play(clock: t)
+</code></pre>
+<p>Und wir können die Routine danach fragen, auf welchem Clock sie läuft:</p>
+<pre><code>r.clock.tempo // =&gt; 2.0
+</code></pre>
+<p>Bzw. können wir während die Routine läuft das Tempo ihres Clocks einstellen:</p>
+<pre><code>r.clock.tempo = 0.5 // Das Tempo wird auf 30 BPM herabgesetzt
+</code></pre></div>
             </div>
         </div>
 

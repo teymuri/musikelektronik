@@ -65,6 +65,20 @@
 <li>
     <a href="./" class="dropdown-item active">Sequenzierung</a>
 </li>
+            
+<li>
+    <a href="../clock/" class="dropdown-item">Zeitmanagement mit Uhren</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Sommersemester</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../add-synth/" class="dropdown-item">Additive Synthese</a>
+</li>
     </ul>
   </li>
                                 </ul>
@@ -104,7 +118,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../loesungen/" class="nav-link">
+                                <a rel="next" href="../clock/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -129,6 +143,14 @@
             <li class="nav-item" data-level="1"><a href="#sequenzierung" class="nav-link">Sequenzierung</a>
               <ul class="nav flex-column">
             <li class="nav-item" data-level="2"><a href="#routine" class="nav-link">Routine</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#task" class="nav-link">Task</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#methodenvergleichstabelle" class="nav-link">Methodenvergleichstabelle</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -263,7 +285,43 @@ Routine {
 4
 Ende
 */
-</code></pre></div>
+</code></pre>
+<h2 id="task">Task</h2>
+<p>Ein Task ist größtenteils eine ähnliche Konstruktion wie eine Routine.</p>
+<h2 id="methodenvergleichstabelle">Methodenvergleichstabelle</h2>
+<p>Die folgende Tabelle fasst einige der wichtigsten (gemeinsamen) Methoden der beiden Klassen zusammen. Für vollständige Informationen
+konsultieren Sie bitte die Dokumentation der jeweiligen Klasse.</p>
+<table>
+<thead>
+<tr>
+<th>Methodennamen</th>
+<th>Routine</th>
+<th>Task</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reset</code></td>
+<td>Setzt den internen Zustand des Streams auf den Anfang zurück</td>
+<td>Gleich wie bei <strong>Routine</strong></td>
+</tr>
+<tr>
+<td><code>pause</code></td>
+<td><em>Nicht vorhanden!</em></td>
+<td>Unterbricht momentan den Stream-Ablauf. Der nächste <code>play</code>-Abruf nimmt den Vorgang dort, wo er abgebrochen wurde, wieder auf</td>
+</tr>
+<tr>
+<td><code>stop</code></td>
+<td>Zerstört den Stream-Ablauf</td>
+<td>Gleich wie <code>pause</code></td>
+</tr>
+<tr>
+<td><code>play</code></td>
+<td>Evaluiert die Funktion der Klasse (das erste Argument) solange, bis sie ausgelaufen ist (d.h. nichts mehr zurückgeben kann bzw. <code>nil</code> zurückgegeben hat)</td>
+<td>Gleich wie bei <strong>Routine</strong></td>
+</tr>
+</tbody>
+</table></div>
             </div>
         </div>
 
